@@ -1,0 +1,17 @@
+cmake-build-asl-debug
+cmake-build-asl-release
+cmake-build-asl-debug-remote
+cmake-build-asl-release-remote
+cmake-build-debug
+cmake-build-release
+cmake-build-asl-debug-coverage
+cmake-build-asl-release-coverage
+**.jpg
+**.png
+.idea
+.DS_Store
+*.log
+*.aux
+*.sty
+*.gz
+**/Data/thicc
