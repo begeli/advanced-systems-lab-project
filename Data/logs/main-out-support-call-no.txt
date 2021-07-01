@@ -1,0 +1,627 @@
+################ Performance Tests for do_intersect3D ###################
+
+Running: do_intersect3D for input size n = 2^4
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D for input size n = 2^5
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D for input size n = 2^6
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D for input size n = 2^7
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D for input size n = 2^8
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D for input size n = 2^9
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D for input size n = 2^10
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D for input size n = 2^11
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D for input size n = 2^12
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D for input size n = 2^13
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D for input size n = 2^14
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D for input size n = 2^15
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D for input size n = 2^16
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D for input size n = 2^17
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D for input size n = 2^18
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D for input size n = 2^19
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D for input size n = 2^20
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D for input size n = 2^21
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D for input size n = 2^22
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D for input size n = 2^23
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D for input size n = 2^24
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D for input size n = 2^25
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D for input size n = 2^26
+Support and inverse support was called 4 each.
+################ Performance Tests for do_intersect3D_optimized ###################
+
+Running: do_intersect3D_optimized for input size n = 2^4
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized for input size n = 2^5
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized for input size n = 2^6
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized for input size n = 2^7
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized for input size n = 2^8
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized for input size n = 2^9
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized for input size n = 2^10
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized for input size n = 2^11
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized for input size n = 2^12
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized for input size n = 2^13
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized for input size n = 2^14
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized for input size n = 2^15
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized for input size n = 2^16
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized for input size n = 2^17
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized for input size n = 2^18
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized for input size n = 2^19
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized for input size n = 2^20
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized for input size n = 2^21
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized for input size n = 2^22
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized for input size n = 2^23
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized for input size n = 2^24
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized for input size n = 2^25
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized for input size n = 2^26
+Support and inverse support was called 4 each.
+################ Performance Tests for do_intersect3D_optimized_inlined ###################
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^4
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^5
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^6
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^7
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^8
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^9
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^10
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^11
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^12
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^13
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^14
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^15
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^16
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^17
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^18
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^19
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^20
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^21
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^22
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^23
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^24
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^25
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^26
+Support and inverse support was called 4 each.
+################ Performance Tests for do_intersect3D_o_i_lu8 ###################
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^4
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^5
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^6
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^7
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^8
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^9
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^10
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^11
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^12
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^13
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^14
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^15
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^16
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^17
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^18
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^19
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^20
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^21
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^22
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^23
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^24
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^25
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^26
+Support and inverse support was called 4 each.
+################ Performance Tests for do_intersect3D_vectorized ###################
+
+Running: do_intersect3D_vectorized for input size n = 2^4
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized for input size n = 2^5
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized for input size n = 2^6
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized for input size n = 2^7
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized for input size n = 2^8
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized for input size n = 2^9
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized for input size n = 2^10
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized for input size n = 2^11
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized for input size n = 2^12
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized for input size n = 2^13
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized for input size n = 2^14
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized for input size n = 2^15
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized for input size n = 2^16
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized for input size n = 2^17
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized for input size n = 2^18
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized for input size n = 2^19
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized for input size n = 2^20
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized for input size n = 2^21
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized for input size n = 2^22
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized for input size n = 2^23
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized for input size n = 2^24
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized for input size n = 2^25
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized for input size n = 2^26
+Support and inverse support was called 4 each.
+################ Performance Tests for do_intersect3D_vectorized_inlined ###################
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^4
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^5
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^6
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^7
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^8
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^9
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^10
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^11
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^12
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^13
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^14
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^15
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^16
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^17
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^18
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^19
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^20
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^21
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^22
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^23
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^24
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^25
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^26
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^4
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^5
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^6
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^7
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^8
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^9
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^10
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^11
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^12
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^13
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^14
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^15
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^16
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^17
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^18
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^19
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^20
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^21
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^22
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^23
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^24
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^25
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^26
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^4
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^5
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^6
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^7
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^8
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^9
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^10
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^11
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^12
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^13
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^14
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^15
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^16
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^17
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^18
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^19
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^20
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^21
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^22
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^23
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^24
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^25
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^26
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^4
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^5
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^6
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^7
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^8
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^9
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^10
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^11
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^12
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^13
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^14
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^15
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^16
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^17
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^18
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^19
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^20
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^21
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^22
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^23
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^24
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^25
+Support and inverse support was called 4 each.
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^26
+Support and inverse support was called 4 each.

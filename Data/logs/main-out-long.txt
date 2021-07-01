@@ -1,0 +1,631 @@
+Starting program. 6 function(s) registered.
+################ Performance Tests for do_intersect3D ###################
+
+Running: do_intersect3D for input size n = 2^4
+Flop count for do_intersect3D is: 939
+
+Running: do_intersect3D for input size n = 2^5
+Flop count for do_intersect3D is: 1707
+
+Running: do_intersect3D for input size n = 2^6
+Flop count for do_intersect3D is: 3243
+
+Running: do_intersect3D for input size n = 2^7
+Flop count for do_intersect3D is: 6315
+
+Running: do_intersect3D for input size n = 2^8
+Flop count for do_intersect3D is: 12459
+
+Running: do_intersect3D for input size n = 2^9
+Flop count for do_intersect3D is: 24744
+
+Running: do_intersect3D for input size n = 2^10
+Flop count for do_intersect3D is: 49320
+
+Running: do_intersect3D for input size n = 2^11
+Flop count for do_intersect3D is: 98472
+
+Running: do_intersect3D for input size n = 2^12
+Flop count for do_intersect3D is: 196776
+
+Running: do_intersect3D for input size n = 2^13
+Flop count for do_intersect3D is: 393387
+
+Running: do_intersect3D for input size n = 2^14
+Flop count for do_intersect3D is: 786600
+
+Running: do_intersect3D for input size n = 2^15
+Flop count for do_intersect3D is: 1573032
+
+Running: do_intersect3D for input size n = 2^16
+Flop count for do_intersect3D is: 3145896
+
+Running: do_intersect3D for input size n = 2^17
+Flop count for do_intersect3D is: 6291627
+
+Running: do_intersect3D for input size n = 2^18
+Flop count for do_intersect3D is: 12583080
+
+Running: do_intersect3D for input size n = 2^19
+Flop count for do_intersect3D is: 25165995
+
+Running: do_intersect3D for input size n = 2^20
+Flop count for do_intersect3D is: 50331816
+
+Running: do_intersect3D for input size n = 2^21
+Flop count for do_intersect3D is: 100663464
+
+Running: do_intersect3D for input size n = 2^22
+Flop count for do_intersect3D is: 201326760
+
+Running: do_intersect3D for input size n = 2^23
+Flop count for do_intersect3D is: 402653352
+
+Running: do_intersect3D for input size n = 2^24
+Flop count for do_intersect3D is: 805306539
+
+Running: do_intersect3D for input size n = 2^25
+Flop count for do_intersect3D is: 1610612904
+
+Running: do_intersect3D for input size n = 2^26
+Flop count for do_intersect3D is: 3221225643
+################ Performance Tests for do_intersect3D_optimized ###################
+
+Running: do_intersect3D_optimized for input size n = 2^4
+Flop count for do_intersect3D_optimized is: 916
+
+Running: do_intersect3D_optimized for input size n = 2^5
+Flop count for do_intersect3D_optimized is: 1666
+
+Running: do_intersect3D_optimized for input size n = 2^6
+Flop count for do_intersect3D_optimized is: 3225
+
+Running: do_intersect3D_optimized for input size n = 2^7
+Flop count for do_intersect3D_optimized is: 6276
+
+Running: do_intersect3D_optimized for input size n = 2^8
+Flop count for do_intersect3D_optimized is: 12446
+
+Running: do_intersect3D_optimized for input size n = 2^9
+Flop count for do_intersect3D_optimized is: 24709
+
+Running: do_intersect3D_optimized for input size n = 2^10
+Flop count for do_intersect3D_optimized is: 49316
+
+Running: do_intersect3D_optimized for input size n = 2^11
+Flop count for do_intersect3D_optimized is: 98451
+
+Running: do_intersect3D_optimized for input size n = 2^12
+Flop count for do_intersect3D_optimized is: 196782
+
+Running: do_intersect3D_optimized for input size n = 2^13
+Flop count for do_intersect3D_optimized is: 393377
+
+Running: do_intersect3D_optimized for input size n = 2^14
+Flop count for do_intersect3D_optimized is: 786614
+
+Running: do_intersect3D_optimized for input size n = 2^15
+Flop count for do_intersect3D_optimized is: 1573020
+
+Running: do_intersect3D_optimized for input size n = 2^16
+Flop count for do_intersect3D_optimized is: 3145912
+
+Running: do_intersect3D_optimized for input size n = 2^17
+Flop count for do_intersect3D_optimized is: 6291622
+
+Running: do_intersect3D_optimized for input size n = 2^18
+Flop count for do_intersect3D_optimized is: 12583111
+
+Running: do_intersect3D_optimized for input size n = 2^19
+Flop count for do_intersect3D_optimized is: 25165998
+
+Running: do_intersect3D_optimized for input size n = 2^20
+Flop count for do_intersect3D_optimized is: 50331842
+
+Running: do_intersect3D_optimized for input size n = 2^21
+Flop count for do_intersect3D_optimized is: 100663463
+
+Running: do_intersect3D_optimized for input size n = 2^22
+Flop count for do_intersect3D_optimized is: 201326792
+
+Running: do_intersect3D_optimized for input size n = 2^23
+Flop count for do_intersect3D_optimized is: 402653366
+
+Running: do_intersect3D_optimized for input size n = 2^24
+Flop count for do_intersect3D_optimized is: 805306577
+
+Running: do_intersect3D_optimized for input size n = 2^25
+Flop count for do_intersect3D_optimized is: 1610612920
+
+Running: do_intersect3D_optimized for input size n = 2^26
+Flop count for do_intersect3D_optimized is: 3221225689
+################ Performance Tests for do_intersect3D_optimized_inlined ###################
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^4
+Flop count for do_intersect3D_optimized_inlined is: 939
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^5
+Flop count for do_intersect3D_optimized_inlined is: 1707
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^6
+Flop count for do_intersect3D_optimized_inlined is: 3243
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^7
+Flop count for do_intersect3D_optimized_inlined is: 6315
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^8
+Flop count for do_intersect3D_optimized_inlined is: 12459
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^9
+Flop count for do_intersect3D_optimized_inlined is: 24744
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^10
+Flop count for do_intersect3D_optimized_inlined is: 49320
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^11
+Flop count for do_intersect3D_optimized_inlined is: 98472
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^12
+Flop count for do_intersect3D_optimized_inlined is: 196776
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^13
+Flop count for do_intersect3D_optimized_inlined is: 393387
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^14
+Flop count for do_intersect3D_optimized_inlined is: 786600
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^15
+Flop count for do_intersect3D_optimized_inlined is: 1573032
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^16
+Flop count for do_intersect3D_optimized_inlined is: 3145896
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^17
+Flop count for do_intersect3D_optimized_inlined is: 6291627
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^18
+Flop count for do_intersect3D_optimized_inlined is: 12583080
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^19
+Flop count for do_intersect3D_optimized_inlined is: 25165995
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^20
+Flop count for do_intersect3D_optimized_inlined is: 50331816
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^21
+Flop count for do_intersect3D_optimized_inlined is: 100663464
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^22
+Flop count for do_intersect3D_optimized_inlined is: 201326760
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^23
+Flop count for do_intersect3D_optimized_inlined is: 402653352
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^24
+Flop count for do_intersect3D_optimized_inlined is: 805306539
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^25
+Flop count for do_intersect3D_optimized_inlined is: 1610612904
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^26
+Flop count for do_intersect3D_optimized_inlined is: 3221225643
+################ Performance Tests for do_intersect3D_o_i_lu8 ###################
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^4
+Flop count for do_intersect3D_o_i_lu8 is: 939
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^5
+Flop count for do_intersect3D_o_i_lu8 is: 1707
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^6
+Flop count for do_intersect3D_o_i_lu8 is: 3243
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^7
+Flop count for do_intersect3D_o_i_lu8 is: 6315
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^8
+Flop count for do_intersect3D_o_i_lu8 is: 12459
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^9
+Flop count for do_intersect3D_o_i_lu8 is: 24744
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^10
+Flop count for do_intersect3D_o_i_lu8 is: 49320
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^11
+Flop count for do_intersect3D_o_i_lu8 is: 98472
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^12
+Flop count for do_intersect3D_o_i_lu8 is: 196776
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^13
+Flop count for do_intersect3D_o_i_lu8 is: 393387
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^14
+Flop count for do_intersect3D_o_i_lu8 is: 786600
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^15
+Flop count for do_intersect3D_o_i_lu8 is: 1573032
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^16
+Flop count for do_intersect3D_o_i_lu8 is: 3145896
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^17
+Flop count for do_intersect3D_o_i_lu8 is: 6291627
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^18
+Flop count for do_intersect3D_o_i_lu8 is: 12583080
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^19
+Flop count for do_intersect3D_o_i_lu8 is: 25165995
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^20
+Flop count for do_intersect3D_o_i_lu8 is: 50331816
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^21
+Flop count for do_intersect3D_o_i_lu8 is: 100663464
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^22
+Flop count for do_intersect3D_o_i_lu8 is: 201326760
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^23
+Flop count for do_intersect3D_o_i_lu8 is: 402653352
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^24
+Flop count for do_intersect3D_o_i_lu8 is: 805306539
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^25
+Flop count for do_intersect3D_o_i_lu8 is: 1610612904
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^26
+Flop count for do_intersect3D_o_i_lu8 is: 3221225643
+################ Performance Tests for do_intersect3D_vectorized ###################
+
+Running: do_intersect3D_vectorized for input size n = 2^4
+Flop count for do_intersect3D_vectorized is: 1323
+
+Running: do_intersect3D_vectorized for input size n = 2^5
+Flop count for do_intersect3D_vectorized is: 2347
+
+Running: do_intersect3D_vectorized for input size n = 2^6
+Flop count for do_intersect3D_vectorized is: 4395
+
+Running: do_intersect3D_vectorized for input size n = 2^7
+Flop count for do_intersect3D_vectorized is: 8491
+
+Running: do_intersect3D_vectorized for input size n = 2^8
+Flop count for do_intersect3D_vectorized is: 16683
+
+Running: do_intersect3D_vectorized for input size n = 2^9
+Flop count for do_intersect3D_vectorized is: 33064
+
+Running: do_intersect3D_vectorized for input size n = 2^10
+Flop count for do_intersect3D_vectorized is: 65832
+
+Running: do_intersect3D_vectorized for input size n = 2^11
+Flop count for do_intersect3D_vectorized is: 131368
+
+Running: do_intersect3D_vectorized for input size n = 2^12
+Flop count for do_intersect3D_vectorized is: 262440
+
+Running: do_intersect3D_vectorized for input size n = 2^13
+Flop count for do_intersect3D_vectorized is: 524587
+
+Running: do_intersect3D_vectorized for input size n = 2^14
+Flop count for do_intersect3D_vectorized is: 1048872
+
+Running: do_intersect3D_vectorized for input size n = 2^15
+Flop count for do_intersect3D_vectorized is: 2097448
+
+Running: do_intersect3D_vectorized for input size n = 2^16
+Flop count for do_intersect3D_vectorized is: 4194600
+
+Running: do_intersect3D_vectorized for input size n = 2^17
+Flop count for do_intersect3D_vectorized is: 8388907
+
+Running: do_intersect3D_vectorized for input size n = 2^18
+Flop count for do_intersect3D_vectorized is: 16777512
+
+Running: do_intersect3D_vectorized for input size n = 2^19
+Flop count for do_intersect3D_vectorized is: 33554731
+
+Running: do_intersect3D_vectorized for input size n = 2^20
+Flop count for do_intersect3D_vectorized is: 67109160
+
+Running: do_intersect3D_vectorized for input size n = 2^21
+Flop count for do_intersect3D_vectorized is: 134218024
+
+Running: do_intersect3D_vectorized for input size n = 2^22
+Flop count for do_intersect3D_vectorized is: 268435752
+
+Running: do_intersect3D_vectorized for input size n = 2^23
+Flop count for do_intersect3D_vectorized is: 536871208
+
+Running: do_intersect3D_vectorized for input size n = 2^24
+Flop count for do_intersect3D_vectorized is: 1073742123
+
+Running: do_intersect3D_vectorized for input size n = 2^25
+Flop count for do_intersect3D_vectorized is: 2147483947
+
+Running: do_intersect3D_vectorized for input size n = 2^26
+Flop count for do_intersect3D_vectorized is: 4294967595
+################ Performance Tests for do_intersect3D_vectorized_inlined ###################
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^4
+Flop count for do_intersect3D_vectorized_inlined is: 1323
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^5
+Flop count for do_intersect3D_vectorized_inlined is: 2347
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^6
+Flop count for do_intersect3D_vectorized_inlined is: 4395
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^7
+Flop count for do_intersect3D_vectorized_inlined is: 8491
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^8
+Flop count for do_intersect3D_vectorized_inlined is: 16683
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^9
+Flop count for do_intersect3D_vectorized_inlined is: 33064
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^10
+Flop count for do_intersect3D_vectorized_inlined is: 65832
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^11
+Flop count for do_intersect3D_vectorized_inlined is: 131368
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^12
+Flop count for do_intersect3D_vectorized_inlined is: 262440
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^13
+Flop count for do_intersect3D_vectorized_inlined is: 524587
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^14
+Flop count for do_intersect3D_vectorized_inlined is: 1048872
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^15
+Flop count for do_intersect3D_vectorized_inlined is: 2097448
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^16
+Flop count for do_intersect3D_vectorized_inlined is: 4194600
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^17
+Flop count for do_intersect3D_vectorized_inlined is: 8388907
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^18
+Flop count for do_intersect3D_vectorized_inlined is: 16777512
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^19
+Flop count for do_intersect3D_vectorized_inlined is: 33554731
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^20
+Flop count for do_intersect3D_vectorized_inlined is: 67109160
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^21
+Flop count for do_intersect3D_vectorized_inlined is: 134218024
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^22
+Flop count for do_intersect3D_vectorized_inlined is: 268435752
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^23
+Flop count for do_intersect3D_vectorized_inlined is: 536871208
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^24
+Flop count for do_intersect3D_vectorized_inlined is: 1073742123
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^25
+Flop count for do_intersect3D_vectorized_inlined is: 2147483947
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^26
+Flop count for do_intersect3D_vectorized_inlined is: 4294967595
+################ Performance Tests for do_intersect3D_soa_vectorized ###################
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^4
+Flop count for do_intersect3D_soa_vectorized is: 1195
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^5
+Flop count for do_intersect3D_soa_vectorized is: 2091
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^6
+Flop count for do_intersect3D_soa_vectorized is: 3883
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^7
+Flop count for do_intersect3D_soa_vectorized is: 7467
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^8
+Flop count for do_intersect3D_soa_vectorized is: 14635
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^9
+Flop count for do_intersect3D_soa_vectorized is: 28968
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^10
+Flop count for do_intersect3D_soa_vectorized is: 57640
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^11
+Flop count for do_intersect3D_soa_vectorized is: 114984
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^12
+Flop count for do_intersect3D_soa_vectorized is: 229672
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^13
+Flop count for do_intersect3D_soa_vectorized is: 459051
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^14
+Flop count for do_intersect3D_soa_vectorized is: 917800
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^15
+Flop count for do_intersect3D_soa_vectorized is: 1835304
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^16
+Flop count for do_intersect3D_soa_vectorized is: 3670312
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^17
+Flop count for do_intersect3D_soa_vectorized is: 7340331
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^18
+Flop count for do_intersect3D_soa_vectorized is: 14680360
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^19
+Flop count for do_intersect3D_soa_vectorized is: 29360427
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^20
+Flop count for do_intersect3D_soa_vectorized is: 58720552
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^21
+Flop count for do_intersect3D_soa_vectorized is: 117440808
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^22
+Flop count for do_intersect3D_soa_vectorized is: 234881320
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^23
+Flop count for do_intersect3D_soa_vectorized is: 469762344
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^24
+Flop count for do_intersect3D_soa_vectorized is: 939524395
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^25
+Flop count for do_intersect3D_soa_vectorized is: 1879048488
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^26
+Flop count for do_intersect3D_soa_vectorized is: 3758096680
+################ Performance Tests for do_intersect3D_soa_vectorized_lu2 ###################
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^4
+Flop count for do_intersect3D_soa_vectorized_lu2 is: 939
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^5
+Flop count for do_intersect3D_soa_vectorized_lu2 is: 2347
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^6
+Flop count for do_intersect3D_soa_vectorized_lu2 is: 4139
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^7
+Flop count for do_intersect3D_soa_vectorized_lu2 is: 7723
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^8
+Flop count for do_intersect3D_soa_vectorized_lu2 is: 14891
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^9
+Flop count for do_intersect3D_soa_vectorized_lu2 is: 29224
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^10
+Flop count for do_intersect3D_soa_vectorized_lu2 is: 57896
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^11
+Flop count for do_intersect3D_soa_vectorized_lu2 is: 115240
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^12
+Flop count for do_intersect3D_soa_vectorized_lu2 is: 229928
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^13
+Flop count for do_intersect3D_soa_vectorized_lu2 is: 459307
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^14
+Flop count for do_intersect3D_soa_vectorized_lu2 is: 918056
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^15
+Flop count for do_intersect3D_soa_vectorized_lu2 is: 1835560
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^16
+Flop count for do_intersect3D_soa_vectorized_lu2 is: 3670568
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^17
+Flop count for do_intersect3D_soa_vectorized_lu2 is: 7340587
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^18
+Flop count for do_intersect3D_soa_vectorized_lu2 is: 14680616
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^19
+Flop count for do_intersect3D_soa_vectorized_lu2 is: 29360683
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^20
+Flop count for do_intersect3D_soa_vectorized_lu2 is: 58720808
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^21
+Flop count for do_intersect3D_soa_vectorized_lu2 is: 117441064
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^22
+Flop count for do_intersect3D_soa_vectorized_lu2 is: 234881576
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^23
+Flop count for do_intersect3D_soa_vectorized_lu2 is: 469762600
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^24
+Flop count for do_intersect3D_soa_vectorized_lu2 is: 939524651
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^25
+Flop count for do_intersect3D_soa_vectorized_lu2 is: 1879048744
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^26
+Flop count for do_intersect3D_soa_vectorized_lu2 is: 3758096936
+################ Performance Tests for do_intersect3D_soa_vectorized_inlined ###################
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^4
+Flop count for do_intersect3D_soa_vectorized_inlined is: 1195
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^5
+Flop count for do_intersect3D_soa_vectorized_inlined is: 2091
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^6
+Flop count for do_intersect3D_soa_vectorized_inlined is: 3883
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^7
+Flop count for do_intersect3D_soa_vectorized_inlined is: 7467
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^8
+Flop count for do_intersect3D_soa_vectorized_inlined is: 14635
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^9
+Flop count for do_intersect3D_soa_vectorized_inlined is: 28968
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^10
+Flop count for do_intersect3D_soa_vectorized_inlined is: 57640
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^11
+Flop count for do_intersect3D_soa_vectorized_inlined is: 114984
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^12
+Flop count for do_intersect3D_soa_vectorized_inlined is: 229672
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^13
+Flop count for do_intersect3D_soa_vectorized_inlined is: 459051
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^14
+Flop count for do_intersect3D_soa_vectorized_inlined is: 917800
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^15
+Flop count for do_intersect3D_soa_vectorized_inlined is: 1835304
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^16
+Flop count for do_intersect3D_soa_vectorized_inlined is: 3670312
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^17
+Flop count for do_intersect3D_soa_vectorized_inlined is: 7340331
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^18
+Flop count for do_intersect3D_soa_vectorized_inlined is: 14680360
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^19
+Flop count for do_intersect3D_soa_vectorized_inlined is: 29360427
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^20
+Flop count for do_intersect3D_soa_vectorized_inlined is: 58720552
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^21
+Flop count for do_intersect3D_soa_vectorized_inlined is: 117440808
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^22
+Flop count for do_intersect3D_soa_vectorized_inlined is: 234881320
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^23
+Flop count for do_intersect3D_soa_vectorized_inlined is: 469762344
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^24
+Flop count for do_intersect3D_soa_vectorized_inlined is: 939524395
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^25
+Flop count for do_intersect3D_soa_vectorized_inlined is: 1879048488
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^26
+Flop count for do_intersect3D_soa_vectorized_inlined is: 3758096680

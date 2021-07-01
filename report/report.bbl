@@ -1,0 +1,87 @@
+\newcommand{\SortNoop}[1]{}
+\begin{thebibliography}{10}
+
+\bibitem{original_gjk}
+E.G. Gilbert, D.W. Johnson, and S.S. Keerthi,
+\newblock ``A fast procedure for computing the distance between complex objects
+  in three-dimensional space,''
+\newblock {\em IEEE Journal on Robotics and Automation}, vol. 4, no. 2, pp.
+  193--203, 1988.
+
+\bibitem{muratori}
+Casey Muratori,
+\newblock ``Implementing gjk,'' 2006.
+
+\bibitem{gjk}
+Jeff Linahan,
+\newblock ``A gilbert-johnson-keerthi algorithmgeometric interpretation of the
+  boolean gilbert-johnson-keerthi algorithm,'' 2015.
+
+\bibitem{simdop}
+Toni Tan, René Weller, and Gabriel Zachmann,
+\newblock ``Simdop: Simd optimized bounding volume hierarchies for collision
+  detection,''
+\newblock in {\em 2019 IEEE/RSJ International Conference on Intelligent Robots
+  and Systems (IROS)}, 2019, pp. 7256--7263.
+
+\bibitem{hubbard}
+Philip~M. Hubbard,
+\newblock ``Approximating polyhedra with spheres for time-critical collision
+  detection,''
+\newblock {\em ACM Trans. Graph.}, vol. 15, no. 3, pp. 179–210, July 1996.
+
+\bibitem{aabbtree}
+Gino van~den Bergen,
+\newblock ``Efficient collision detection of complex deformable models using
+  aabb trees,''
+\newblock {\em J. Graph. Tools}, vol. 2, no. 4, pp. 1–13, Jan. 1998.
+
+\bibitem{kDOPtree}
+J.T. Klosowski, M.~Held, J.S.B. Mitchell, H.~Sowizral, and K.~Zikan,
+\newblock ``Efficient collision detection using bounding volume hierarchies of
+  k-dops,''
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics}, vol.
+  4, no. 1, pp. 21--36, 1998.
+
+\bibitem{obbtree}
+S.~Gottschalk, M.~C. Lin, and D.~Manocha,
+\newblock ``Obbtree: A hierarchical structure for rapid interference
+  detection,''
+\newblock in {\em Proceedings of the 23rd Annual Conference on Computer
+  Graphics and Interactive Techniques}, New York, NY, USA, 1996, SIGGRAPH '96,
+  p. 171–180, Association for Computing Machinery.
+
+\bibitem{convexhulltree}
+S.~A. Ehmann and M.~C. Lin,
+\newblock ``Accurate and fast proximity queries between polyhedra using convex
+  surface decomposition,''
+\newblock {\em Computer Graphics Forum (Proc. of EUROGRAPHICS 2001)}, vol. 20,
+  no. 3, pp. 500--510, 2001.
+
+\bibitem{bams/1183523140}
+Paul~R. Halmos,
+\newblock ``{Review: Nelson Dunford and Jacob T. Schwartz, Linear operators.
+  Part I: General theory},''
+\newblock {\em Bulletin of the American Mathematical Society}, vol. 65, no. 3,
+  pp. 154 -- 156, 1959.
+
+\bibitem{neural}
+René Weller, David Mainzer, Abhishek Srinivas, Matthias Teschner, and Gabriel
+  Zachmann,
+\newblock ``{Massively Parallel Batch Neural Gas for Bounding Volume Hierarchy
+  Construction},''
+\newblock in {\em Workshop on Virtual Reality Interaction and Physical
+  Simulation}, Jan Bender, Christian Duriez, Fabrice Jaillet, and Gabriel
+  Zachmann, Eds. 2014, The Eurographics Association.
+
+\bibitem{moeller}
+Tomas Möller,
+\newblock ``A fast triangle-triangle intersection test,''
+\newblock {\em Journal of Graphics Tools}, vol. 2, no. 2, pp. 25--30, 1997.
+
+\bibitem{blender}
+Blender~Online Community,
+\newblock {\em Blender - a 3D modelling and rendering package},
+\newblock Blender Foundation, Stichting Blender Foundation, Amsterdam, 2021.
+
+\end{thebibliography}

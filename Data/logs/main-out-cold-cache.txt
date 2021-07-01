@@ -1,0 +1,970 @@
+Starting program. 7 function(s) registered.
+################ Performance Tests for do_intersect3D ###################
+
+Running: do_intersect3D for input size n = 2^3
+11434 cycles
+
+Running: do_intersect3D for input size n = 2^4
+1288 cycles
+
+Running: do_intersect3D for input size n = 2^5
+1648 cycles
+
+Running: do_intersect3D for input size n = 2^6
+2538 cycles
+
+Running: do_intersect3D for input size n = 2^7
+4646 cycles
+
+Running: do_intersect3D for input size n = 2^8
+8846 cycles
+
+Running: do_intersect3D for input size n = 2^9
+17210 cycles
+
+Running: do_intersect3D for input size n = 2^10
+33884 cycles
+
+Running: do_intersect3D for input size n = 2^11
+67456 cycles
+
+Running: do_intersect3D for input size n = 2^12
+134604 cycles
+
+Running: do_intersect3D for input size n = 2^13
+296952 cycles
+
+Running: do_intersect3D for input size n = 2^14
+573008 cycles
+
+Running: do_intersect3D for input size n = 2^15
+1092860 cycles
+
+Running: do_intersect3D for input size n = 2^16
+2197684 cycles
+
+Running: do_intersect3D for input size n = 2^17
+4743122 cycles
+
+Running: do_intersect3D for input size n = 2^18
+13658936 cycles
+
+Running: do_intersect3D for input size n = 2^19
+27084038 cycles
+
+Running: do_intersect3D for input size n = 2^20
+38923006 cycles
+
+Running: do_intersect3D for input size n = 2^21
+77632680 cycles
+
+Running: do_intersect3D for input size n = 2^22
+168337672 cycles
+
+Running: do_intersect3D for input size n = 2^23
+313852912 cycles
+
+Running: do_intersect3D for input size n = 2^24
+617724790 cycles
+
+Running: do_intersect3D for input size n = 2^25
+1236968954 cycles
+
+Running: do_intersect3D for input size n = 2^26
+2565073334 cycles
+################ Performance Tests for do_intersect3D_optimized ###################
+
+Running: do_intersect3D_optimized for input size n = 2^3
+19840 cycles
+
+Running: do_intersect3D_optimized for input size n = 2^4
+1518 cycles
+
+Running: do_intersect3D_optimized for input size n = 2^5
+1912 cycles
+
+Running: do_intersect3D_optimized for input size n = 2^6
+2940 cycles
+
+Running: do_intersect3D_optimized for input size n = 2^7
+5112 cycles
+
+Running: do_intersect3D_optimized for input size n = 2^8
+9554 cycles
+
+Running: do_intersect3D_optimized for input size n = 2^9
+18664 cycles
+
+Running: do_intersect3D_optimized for input size n = 2^10
+36814 cycles
+
+Running: do_intersect3D_optimized for input size n = 2^11
+73502 cycles
+
+Running: do_intersect3D_optimized for input size n = 2^12
+146360 cycles
+
+Running: do_intersect3D_optimized for input size n = 2^13
+292468 cycles
+
+Running: do_intersect3D_optimized for input size n = 2^14
+583726 cycles
+
+Running: do_intersect3D_optimized for input size n = 2^15
+1166012 cycles
+
+Running: do_intersect3D_optimized for input size n = 2^16
+2348124 cycles
+
+Running: do_intersect3D_optimized for input size n = 2^17
+4937678 cycles
+
+Running: do_intersect3D_optimized for input size n = 2^18
+9935122 cycles
+
+Running: do_intersect3D_optimized for input size n = 2^19
+20728208 cycles
+
+Running: do_intersect3D_optimized for input size n = 2^20
+44535336 cycles
+
+Running: do_intersect3D_optimized for input size n = 2^21
+81550414 cycles
+
+Running: do_intersect3D_optimized for input size n = 2^22
+163208968 cycles
+
+Running: do_intersect3D_optimized for input size n = 2^23
+326855878 cycles
+
+Running: do_intersect3D_optimized for input size n = 2^24
+674432806 cycles
+
+Running: do_intersect3D_optimized for input size n = 2^25
+1314949924 cycles
+
+Running: do_intersect3D_optimized for input size n = 2^26
+2720291074 cycles
+################ Performance Tests for do_intersect3D_optimized_inlined ###################
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^3
+22484 cycles
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^4
+1386 cycles
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^5
+1530 cycles
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^6
+2222 cycles
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^7
+3650 cycles
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^8
+6770 cycles
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^9
+12820 cycles
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^10
+25108 cycles
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^11
+49494 cycles
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^12
+99038 cycles
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^13
+196560 cycles
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^14
+404182 cycles
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^15
+789498 cycles
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^16
+1577400 cycles
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^17
+3245516 cycles
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^18
+6545216 cycles
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^19
+13216116 cycles
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^20
+31206406 cycles
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^21
+52733144 cycles
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^22
+104070992 cycles
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^23
+209587200 cycles
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^24
+438106778 cycles
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^25
+838970618 cycles
+
+Running: do_intersect3D_optimized_inlined for input size n = 2^26
+1764536964 cycles
+################ Performance Tests for do_intersect3D_o_i_lu8 ###################
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^3
+3122 cycles
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^4
+1034 cycles
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^5
+1364 cycles
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^6
+2070 cycles
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^7
+3594 cycles
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^8
+6594 cycles
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^9
+12690 cycles
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^10
+24744 cycles
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^11
+49182 cycles
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^12
+98492 cycles
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^13
+204464 cycles
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^14
+392926 cycles
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^15
+790148 cycles
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^16
+1583186 cycles
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^17
+3236690 cycles
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^18
+6588126 cycles
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^19
+13570806 cycles
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^20
+30663150 cycles
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^21
+51680260 cycles
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^22
+103158384 cycles
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^23
+206577958 cycles
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^24
+431270088 cycles
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^25
+826443548 cycles
+
+Running: do_intersect3D_o_i_lu8 for input size n = 2^26
+1740288218 cycles
+################ Performance Tests for do_intersect3D_o_i_branch_later ###################
+
+Running: do_intersect3D_o_i_branch_later for input size n = 2^3
+104016 cycles
+
+Running: do_intersect3D_o_i_branch_later for input size n = 2^4
+2876 cycles
+
+Running: do_intersect3D_o_i_branch_later for input size n = 2^5
+2778 cycles
+
+Running: do_intersect3D_o_i_branch_later for input size n = 2^6
+4104 cycles
+
+Running: do_intersect3D_o_i_branch_later for input size n = 2^7
+6302 cycles
+
+Running: do_intersect3D_o_i_branch_later for input size n = 2^8
+10830 cycles
+
+Running: do_intersect3D_o_i_branch_later for input size n = 2^9
+19124 cycles
+
+Running: do_intersect3D_o_i_branch_later for input size n = 2^10
+37002 cycles
+
+Running: do_intersect3D_o_i_branch_later for input size n = 2^11
+76070 cycles
+
+Running: do_intersect3D_o_i_branch_later for input size n = 2^12
+143752 cycles
+
+Running: do_intersect3D_o_i_branch_later for input size n = 2^13
+288622 cycles
+
+Running: do_intersect3D_o_i_branch_later for input size n = 2^14
+610970 cycles
+
+Running: do_intersect3D_o_i_branch_later for input size n = 2^15
+1148470 cycles
+
+Running: do_intersect3D_o_i_branch_later for input size n = 2^16
+2411334 cycles
+
+Running: do_intersect3D_o_i_branch_later for input size n = 2^17
+4728780 cycles
+
+Running: do_intersect3D_o_i_branch_later for input size n = 2^18
+10352540 cycles
+
+Running: do_intersect3D_o_i_branch_later for input size n = 2^19
+20844142 cycles
+
+Running: do_intersect3D_o_i_branch_later for input size n = 2^20
+54995052 cycles
+
+Running: do_intersect3D_o_i_branch_later for input size n = 2^21
+90948522 cycles
+
+Running: do_intersect3D_o_i_branch_later for input size n = 2^22
+166294946 cycles
+
+Running: do_intersect3D_o_i_branch_later for input size n = 2^23
+332491608 cycles
+
+Running: do_intersect3D_o_i_branch_later for input size n = 2^24
+687810574 cycles
+
+Running: do_intersect3D_o_i_branch_later for input size n = 2^25
+1326895820 cycles
+
+Running: do_intersect3D_o_i_branch_later for input size n = 2^26
+2741090558 cycles
+################ Performance Tests for do_intersect3D_vectorized ###################
+
+Running: do_intersect3D_vectorized for input size n = 2^3
+32240 cycles
+
+Running: do_intersect3D_vectorized for input size n = 2^4
+1308 cycles
+
+Running: do_intersect3D_vectorized for input size n = 2^5
+1538 cycles
+
+Running: do_intersect3D_vectorized for input size n = 2^6
+2302 cycles
+
+Running: do_intersect3D_vectorized for input size n = 2^7
+3942 cycles
+
+Running: do_intersect3D_vectorized for input size n = 2^8
+6524 cycles
+
+Running: do_intersect3D_vectorized for input size n = 2^9
+12110 cycles
+
+Running: do_intersect3D_vectorized for input size n = 2^10
+23190 cycles
+
+Running: do_intersect3D_vectorized for input size n = 2^11
+45120 cycles
+
+Running: do_intersect3D_vectorized for input size n = 2^12
+89398 cycles
+
+Running: do_intersect3D_vectorized for input size n = 2^13
+212304 cycles
+
+Running: do_intersect3D_vectorized for input size n = 2^14
+385456 cycles
+
+Running: do_intersect3D_vectorized for input size n = 2^15
+780596 cycles
+
+Running: do_intersect3D_vectorized for input size n = 2^16
+1544352 cycles
+
+Running: do_intersect3D_vectorized for input size n = 2^17
+3066462 cycles
+
+Running: do_intersect3D_vectorized for input size n = 2^18
+6371484 cycles
+
+Running: do_intersect3D_vectorized for input size n = 2^19
+13222392 cycles
+
+Running: do_intersect3D_vectorized for input size n = 2^20
+30793866 cycles
+
+Running: do_intersect3D_vectorized for input size n = 2^21
+52064938 cycles
+
+Running: do_intersect3D_vectorized for input size n = 2^22
+103457734 cycles
+
+Running: do_intersect3D_vectorized for input size n = 2^23
+207026964 cycles
+
+Running: do_intersect3D_vectorized for input size n = 2^24
+434704964 cycles
+
+Running: do_intersect3D_vectorized for input size n = 2^25
+829126008 cycles
+
+Running: do_intersect3D_vectorized for input size n = 2^26
+1739261104 cycles
+################ Performance Tests for do_intersect3D_vectorized_inlined ###################
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^3
+12514 cycles
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^4
+1118 cycles
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^5
+1354 cycles
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^6
+2262 cycles
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^7
+3712 cycles
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^8
+6582 cycles
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^9
+12140 cycles
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^10
+23562 cycles
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^11
+45940 cycles
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^12
+92924 cycles
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^13
+217814 cycles
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^14
+390120 cycles
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^15
+768386 cycles
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^16
+1500494 cycles
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^17
+3019438 cycles
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^18
+6298546 cycles
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^19
+12161234 cycles
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^20
+26076978 cycles
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^21
+48472878 cycles
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^22
+96848942 cycles
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^23
+194076872 cycles
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^24
+406997246 cycles
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^25
+780046358 cycles
+
+Running: do_intersect3D_vectorized_inlined for input size n = 2^26
+1642590522 cycles
+
+Running: do_intersect3D_soa for input size n = 2^3
+2602 cycles
+
+Running: do_intersect3D_soa for input size n = 2^4
+1244 cycles
+
+Running: do_intersect3D_soa for input size n = 2^5
+1518 cycles
+
+Running: do_intersect3D_soa for input size n = 2^6
+2562 cycles
+
+Running: do_intersect3D_soa for input size n = 2^7
+4708 cycles
+
+Running: do_intersect3D_soa for input size n = 2^8
+9106 cycles
+
+Running: do_intersect3D_soa for input size n = 2^9
+17890 cycles
+
+Running: do_intersect3D_soa for input size n = 2^10
+34652 cycles
+
+Running: do_intersect3D_soa for input size n = 2^11
+70116 cycles
+
+Running: do_intersect3D_soa for input size n = 2^12
+137156 cycles
+
+Running: do_intersect3D_soa for input size n = 2^13
+294510 cycles
+
+Running: do_intersect3D_soa for input size n = 2^14
+566262 cycles
+
+Running: do_intersect3D_soa for input size n = 2^15
+1128376 cycles
+
+Running: do_intersect3D_soa for input size n = 2^16
+2233720 cycles
+
+Running: do_intersect3D_soa for input size n = 2^17
+4497422 cycles
+
+Running: do_intersect3D_soa for input size n = 2^18
+8971398 cycles
+
+Running: do_intersect3D_soa for input size n = 2^19
+18578790 cycles
+
+Running: do_intersect3D_soa for input size n = 2^20
+42509674 cycles
+
+Running: do_intersect3D_soa for input size n = 2^21
+74792960 cycles
+
+Running: do_intersect3D_soa for input size n = 2^22
+151416608 cycles
+
+Running: do_intersect3D_soa for input size n = 2^23
+305045420 cycles
+
+Running: do_intersect3D_soa for input size n = 2^24
+615306750 cycles
+
+Running: do_intersect3D_soa for input size n = 2^25
+1227882340 cycles
+
+Running: do_intersect3D_soa for input size n = 2^26
+2452233008 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^3
+28208 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^4
+1364 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^5
+1250 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^6
+1660 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^7
+2806 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^8
+4954 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^9
+9012 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^10
+17160 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^11
+33442 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^12
+66660 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^13
+132762 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^14
+295854 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^15
+574254 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^16
+1193932 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^17
+2281082 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^18
+4712666 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^19
+11130410 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^20
+20698188 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^21
+43142480 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^22
+72427146 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^23
+144275140 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^24
+304858300 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^25
+579400096 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^26
+1165016202 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^3
+29148 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^4
+1682 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^5
+1154 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^6
+1480 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^7
+1900 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^8
+2932 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^9
+5034 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^10
+9360 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^11
+18092 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^12
+36264 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^13
+71782 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^14
+174804 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^15
+327340 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^16
+657634 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^17
+1322302 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^18
+2734544 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^19
+6169992 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^20
+12855090 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^21
+24414858 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^22
+45948272 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^23
+91248862 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^24
+188918148 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^25
+365016474 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^26
+736046074 cycles
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^3
+3480 cycles
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^4
+1610 cycles
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^5
+1334 cycles
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^6
+1340 cycles
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^7
+1614 cycles
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^8
+1752 cycles
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^9
+2644 cycles
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^10
+3576 cycles
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^11
+6114 cycles
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^12
+12220 cycles
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^13
+22618 cycles
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^14
+121818 cycles
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^15
+213858 cycles
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^16
+425502 cycles
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^17
+914462 cycles
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^18
+2034442 cycles
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^19
+6162966 cycles
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^20
+19821088 cycles
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^21
+27845568 cycles
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^22
+54005966 cycles
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^23
+107127508 cycles
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^24
+230065216 cycles
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^25
+432915766 cycles
+
+Running: do_intersect3D_soa_vectorized for input size n = 2^26
+869237302 cycles
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^3
+3692 cycles
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^4
+1270 cycles
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^5
+1840 cycles
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^6
+1206 cycles
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^7
+1496 cycles
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^8
+1846 cycles
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^9
+2820 cycles
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^10
+3602 cycles
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^11
+6098 cycles
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^12
+12606 cycles
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^13
+23308 cycles
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^14
+113112 cycles
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^15
+181706 cycles
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^16
+407890 cycles
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^17
+966388 cycles
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^18
+2735116 cycles
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^19
+6455846 cycles
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^20
+20262788 cycles
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^21
+27752144 cycles
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^22
+54090402 cycles
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^23
+107205542 cycles
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^24
+228641268 cycles
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^25
+434379066 cycles
+
+Running: do_intersect3D_soa_vectorized_lu2 for input size n = 2^26
+868851926 cycles
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^3
+3656 cycles
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^4
+1704 cycles
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^5
+1088 cycles
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^6
+964 cycles
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^7
+1108 cycles
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^8
+1586 cycles
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^9
+1970 cycles
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^10
+3124 cycles
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^11
+5660 cycles
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^12
+12112 cycles
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^13
+21920 cycles
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^14
+119996 cycles
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^15
+203478 cycles
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^16
+384966 cycles
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^17
+907782 cycles
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^18
+1955504 cycles
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^19
+5476374 cycles
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^20
+18170646 cycles
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^21
+25809308 cycles
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^22
+49872214 cycles
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^23
+100275546 cycles
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^24
+215163162 cycles
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^25
+405832372 cycles
+
+Running: do_intersect3D_soa_vectorized_inlined for input size n = 2^26
+804410440 cycles
+Running: do_intersect3D
+34982 cycles
+Running: do_intersect3D_optimized
+38208 cycles
+Running: do_intersect3D_optimized_inlined
+25586 cycles
+Running: do_intersect3D_o_i_lu8
+25710 cycles
+Running: do_intersect3D_o_i_branch_later
+39300 cycles
+Running: do_intersect3D_vectorized
+24652 cycles
+Running: do_intersect3D_vectorized_inlined
+25214 cycles
+Running: do_intersect3D_soa
+36088 cycles
+Running: do_intersect3D_soa_v_slow_idx
+50940 cycles
+Running: do_intersect3D_soa_v_slow_idx_inlined
+10744 cycles
+Running: do_intersect3D_soa_vectorized
+4848 cycles
+Running: do_intersect3D_soa_vectorized_lu2
+4960 cycles
+Running: do_intersect3D_soa_vectorized_inlined
+4100 cycles

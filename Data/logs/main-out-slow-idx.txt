@@ -1,0 +1,137 @@
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^4
+952 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^5
+1081 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^6
+1500 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^7
+2583 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^8
+4609 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^9
+8732 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^10
+16987 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^11
+33546 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^12
+66724 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^13
+132354 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^14
+264412 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^15
+531740 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^16
+1055783 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^17
+2125153 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^18
+4465748 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^19
+8979228 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^20
+18490471 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^21
+36086785 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^22
+72229488 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^23
+146164682 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^24
+290583330 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^25
+585511528 cycles
+
+Running: do_intersect3D_soa_v_slow_idx for input size n = 2^26
+1162419696 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^4
+741 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^5
+842 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^6
+1048 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^7
+1619 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^8
+2720 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^9
+4905 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^10
+9255 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^11
+18072 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^12
+35788 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^13
+71062 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^14
+141867 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^15
+282679 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^16
+565195 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^17
+1124478 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^18
+2382808 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^19
+5203033 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^20
+10719750 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^21
+22378936 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^22
+45572476 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^23
+92444119 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^24
+206053962 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^25
+366620464 cycles
+
+Running: do_intersect3D_soa_v_slow_idx_inlined for input size n = 2^26
+732479598 cycles

@@ -1,0 +1,7 @@
+set(ASL_SOURCES
+        ${ASL_SOURCES}
+        ${CMAKE_CURRENT_SOURCE_DIR}/TriMesh.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/CHObject.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/LinAlg.c
+        PARENT_SCOPE
+)
