@@ -27,9 +27,12 @@ void support3D_vectorized(const float (* points)[3], const float *dir, float *re
   __m128 vertex_0, vertex_1, vertex_2, vertex_3, vertex_4, vertex_5, vertex_6, vertex_7;
   __m128 vertex_8, vertex_9, vertex_10, vertex_11, vertex_12, vertex_13, vertex_14, vertex_15;
 
+  // Variables for combined vertices vertex_z_y means we combined vertices z and y.
   __m256 vertex_0_1, vertex_2_3, vertex_4_5, vertex_6_7;
   __m256 vertex_8_9, vertex_10_11, vertex_12_13, vertex_14_15;
 
+  // Variables for combined dot products of vertices dp_zy means we store the dot product for vertex z and y.
+  // dpz_y means we store the dot products for vertices between z and y.
   __m256 dp_01, dp_23, dp_45, dp_67, dp0_7;
   __m256 dp_89, dp_1011, dp_1213, dp_1415, dp8_15;
 
@@ -39,16 +42,23 @@ void support3D_vectorized(const float (* points)[3], const float *dir, float *re
   __m256i argmax_v = _mm256_set1_epi32(0);
   __m256i argmax_v_1 = _mm256_set1_epi32(0);
 
+  // Variables to hold the current value of indices we are looking at.
   __m256i curr_ind_v = _mm256_set_epi32(-9, -11, -13, -15, -10, -12, -14, -16);
   __m256i curr_ind_v_1 = _mm256_set_epi32(-1, -3, -5, -7, -2, -4, -6, -8);
+  
+  // direction vector
   __m256 dir_v = _mm256_set_ps(0.0f, dir[2], dir[1], dir[0], 0.0f, dir[2], dir[1], dir[0]);
 
+  // tmp variables are used as intermediate computations - masks hold the results of comparisons
+  // float vectors hold the results of local max dot products as we are combining them from 4 vectors of dp_zy to 1 combined vector of dpz_y
   __m256 tmp1, tmp2, mask;
   __m256 tmp5, tmp6, mask1;
 
+  // int vectors hold the results of intermediate stages while we are calculating the argmin/argmax.
   __m256i tmp3, tmp4;
   __m256i tmp7, tmp8;
 
+  // vector we use to increment indices by 16 because technically we unroll the loop by 16 because of the vector sizes.
   __m256i sixteens = _mm256_set1_epi32(16);
 
   float dp, dpmax = -1e9;
@@ -56,9 +66,11 @@ void support3D_vectorized(const float (* points)[3], const float *dir, float *re
   int i = 0;
 
   for (i = 0; i < N - 15; i += 16) {
+    // Compute the current indices
     curr_ind_v = _mm256_add_epi32(curr_ind_v, sixteens);
     curr_ind_v_1 = _mm256_add_epi32(curr_ind_v_1, sixteens);
-
+  
+    // Load the vertices
     vertex_0 = _mm_loadu_ps(points[i]);
     vertex_1 = _mm_loadu_ps(points[i + 1]);
     vertex_2 = _mm_loadu_ps(points[i + 2]);
@@ -77,6 +89,7 @@ void support3D_vectorized(const float (* points)[3], const float *dir, float *re
     vertex_14 = _mm_loadu_ps(points[i + 14]);
     vertex_15 = _mm_set_ps(0.0f, points[i + 15][2], points[i + 15][1], points[i + 15][0]);
 
+    // Combine the vertices
     vertex_0_1 = _mm256_set_m128(vertex_1, vertex_0);
     vertex_2_3 = _mm256_set_m128(vertex_3, vertex_2);
     vertex_4_5 = _mm256_set_m128(vertex_5, vertex_4);
@@ -87,6 +100,7 @@ void support3D_vectorized(const float (* points)[3], const float *dir, float *re
     vertex_12_13 = _mm256_set_m128(vertex_13, vertex_12);
     vertex_14_15 = _mm256_set_m128(vertex_15, vertex_14);
 
+    // Compute the dot product of vertices and the direction.
     dp_01 = _mm256_dp_ps(vertex_0_1, dir_v, 113);
     dp_23 = _mm256_dp_ps(vertex_2_3, dir_v, 114);
     dp_45 = _mm256_dp_ps(vertex_4_5, dir_v, 116);
@@ -97,6 +111,7 @@ void support3D_vectorized(const float (* points)[3], const float *dir, float *re
     dp_1213 = _mm256_dp_ps(vertex_12_13, dir_v, 116);
     dp_1415 = _mm256_dp_ps(vertex_14_15, dir_v, 120);
 
+    // Combine the results of dot products
     tmp1 = _mm256_or_ps(dp_01, dp_23);
     tmp2 = _mm256_or_ps(dp_45, dp_67);
     dp0_7 = _mm256_or_ps(tmp1, tmp2);
@@ -104,13 +119,15 @@ void support3D_vectorized(const float (* points)[3], const float *dir, float *re
     tmp5 = _mm256_or_ps(dp_89, dp_1011);
     tmp6 = _mm256_or_ps(dp_1213, dp_1415);
     dp8_15 = _mm256_or_ps(tmp5, tmp6);
-
+    
+    // Find the local dpmax and argmax for first 8 vertices
     mask = _mm256_cmp_ps(dp0_7, dpmax_v, _CMP_GT_OS);
     dpmax_v = _mm256_max_ps(dp0_7, dpmax_v);
     tmp3 = _mm256_castps_si256(_mm256_and_ps(mask, _mm256_castsi256_ps(curr_ind_v)));
     tmp4 = _mm256_castps_si256(_mm256_andnot_ps(mask, _mm256_castsi256_ps(argmax_v)));
     argmax_v = _mm256_castps_si256(_mm256_or_ps(_mm256_castsi256_ps(tmp3), _mm256_castsi256_ps(tmp4)));
 
+    // Find the local dpmax and argmax for last 8 vertices
     mask1 = _mm256_cmp_ps(dp8_15, dpmax_v_1, _CMP_GT_OS);
     dpmax_v_1 = _mm256_max_ps(dp8_15, dpmax_v_1);
     tmp7 = _mm256_castps_si256(_mm256_and_ps(mask1, _mm256_castsi256_ps(curr_ind_v_1)));
@@ -118,6 +135,7 @@ void support3D_vectorized(const float (* points)[3], const float *dir, float *re
     argmax_v_1 = _mm256_castps_si256(_mm256_or_ps(_mm256_castsi256_ps(tmp7), _mm256_castsi256_ps(tmp8)));
   }
 
+  // find the dpmax and argmax
   mask = _mm256_cmp_ps(dpmax_v, dpmax_v_1, _CMP_GT_OS);
   dpmax_v = _mm256_max_ps(dpmax_v, dpmax_v_1);
   tmp3 = _mm256_castps_si256(_mm256_and_ps(mask, _mm256_castsi256_ps(argmax_v)));
@@ -163,28 +181,43 @@ void support3D_vectorized(const float (* points)[3], const float *dir, float *re
 [[gnu::target("avx512vl")]]
 void invsup3D_vectorized(const float (* points)[3], const float *dir, float *res, int N) {
   __m128 vertex_0, vertex_1, vertex_2, vertex_3, vertex_4, vertex_5, vertex_6, vertex_7;
+  
+  // Variables for combined vertices vertex_z_y means we combined vertices z and y.
   __m256 vertex_0_1, vertex_2_3, vertex_4_5, vertex_6_7;
+  
+  // Variables for combined dot products of vertices dp_zy means we store the dot product for vertex z and y.
+  // dpz_y means we store the dot products for vertices between z and y.
   __m256 dp_01, dp_23, dp_45, dp_67, dp0_7;
 
   __m256 dpmax_v = _mm256_set1_ps(1e9);
   __m256i argmin_v = _mm256_set1_epi32(0);
+  
+  // Variable to hold the current value of indices we are looking at.
   __m256i curr_ind_v = _mm256_set_epi32(-1, -3, -5, -7, -2, -4, -6, -8);
 
+  // direction vector
   __m256 dir_v = _mm256_set_ps(0.0f, dir[2], dir[1], dir[0], 0.0f, dir[2], dir[1], dir[0]);
 
+  // tmp variables are used as intermediate computations - masks hold the results of comparisons
+  // float vectors hold the results of local min dot products as we are combining them from 4 vectors of dp_zy to 1 combined vector of dpz_y
   __m256 tmp1, tmp2, mask;
   __m256 tmp5, tmp6, mask1;
+  
+  // int vectors hold the results of intermediate stages while we are calculating the argmin/argmax.
   __m256i tmp3, tmp4;
   __m256i tmp7, tmp8;
 
+  // vector we use to increment indices by 8 because technically we unroll the loop by 8 because of the vector sizes.
   __m256i eights = _mm256_set1_epi32(8);
 
   float dp, dpmax = 1e9;
   int argmin = 0;
   int i;
   for (i = 0; i < N - 7; i += 8) {
+    // Compute the current indices
     curr_ind_v = _mm256_add_epi32(curr_ind_v, eights);
 
+    // Load the vertices
     vertex_0 = _mm_loadu_ps(points[i]);
     vertex_1 = _mm_loadu_ps(points[i + 1]);
     vertex_2 = _mm_loadu_ps(points[i + 2]);
@@ -194,20 +227,24 @@ void invsup3D_vectorized(const float (* points)[3], const float *dir, float *res
     vertex_6 = _mm_loadu_ps(points[i + 6]);
     vertex_7 = _mm_set_ps(0.0f, points[i + 7][2], points[i + 7][1], points[i + 7][0]);
 
+    // Combine the vertices
     vertex_0_1 = _mm256_set_m128(vertex_1, vertex_0);
     vertex_2_3 = _mm256_set_m128(vertex_3, vertex_2);
     vertex_4_5 = _mm256_set_m128(vertex_5, vertex_4);
     vertex_6_7 = _mm256_set_m128(vertex_7, vertex_6);
 
+    // Compute the dot products
     dp_01 = _mm256_dp_ps(vertex_0_1, dir_v, 113);
     dp_23 = _mm256_dp_ps(vertex_2_3, dir_v, 114);
     dp_45 = _mm256_dp_ps(vertex_4_5, dir_v, 116);
     dp_67 = _mm256_dp_ps(vertex_6_7, dir_v, 120);
 
+    // Combine the results of dot products
     tmp1 = _mm256_or_ps(dp_01, dp_23);
     tmp2 = _mm256_or_ps(dp_45, dp_67);
     dp0_7 = _mm256_or_ps(tmp1, tmp2);
 
+    // Find the local dpmin and argmin for the 8 vertices
     mask = _mm256_cmp_ps(dp0_7, dpmax_v, _CMP_LT_OS);
     dpmax_v = _mm256_min_ps(dp0_7, dpmax_v);
     tmp3 = _mm256_castps_si256(_mm256_and_ps(mask, _mm256_castsi256_ps(curr_ind_v)));
@@ -215,6 +252,7 @@ void invsup3D_vectorized(const float (* points)[3], const float *dir, float *res
     argmin_v = _mm256_castps_si256(_mm256_or_ps(_mm256_castsi256_ps(tmp3), _mm256_castsi256_ps(tmp4)));
   }
 
+  // Find the argmin and dpmin
   if (i != 0) {
     float dps[8];
     int argmins[8];
@@ -535,9 +573,12 @@ int do_intersect3D_vectorized_inlined(const struct CHObject* obj1, const struct 
   int argmax = 0;
   int i;
 
+  // Joint loop to iterate over both objects and calculate their dpmax/dpmin and argmax/argmin at the same time.
   for (i = 0; i < no_points_min - 7; i += 8) {
+    // Compute the current indices
     curr_ind_v = _mm256_add_epi32(curr_ind_v, eights);
 
+    // Load the vertices of the first object
     vertex_0 = _mm_load_ps(obj1->points[i]);
     vertex_1 = _mm_loadu_ps(obj1->points[i + 1]);
     vertex_2 = _mm_loadu_ps(obj1->points[i + 2]);
@@ -547,6 +588,7 @@ int do_intersect3D_vectorized_inlined(const struct CHObject* obj1, const struct 
     vertex_6 = _mm_loadu_ps(obj1->points[i + 6]);
     vertex_7 = _mm_set_ps(0.0f, obj1->points[i + 7][2], obj1->points[i + 7][1], obj1->points[i + 7][0]);
 
+    // Load the vertices of the second object
     inv_vertex_0 = _mm_load_ps(obj2->points[i]);
     inv_vertex_1 = _mm_loadu_ps(obj2->points[i + 1]);
     inv_vertex_2 = _mm_loadu_ps(obj2->points[i + 2]);
@@ -556,40 +598,48 @@ int do_intersect3D_vectorized_inlined(const struct CHObject* obj1, const struct 
     inv_vertex_6 = _mm_loadu_ps(obj2->points[i + 6]);
     inv_vertex_7 = _mm_set_ps(0.0f, obj2->points[i + 7][2], obj2->points[i + 7][1], obj2->points[i + 7][0]);
 
+    // Combine vertices of the first object
     vertex_0_1 = _mm256_set_m128(vertex_1, vertex_0);
     vertex_2_3 = _mm256_set_m128(vertex_3, vertex_2);
     vertex_4_5 = _mm256_set_m128(vertex_5, vertex_4);
     vertex_6_7 = _mm256_set_m128(vertex_7, vertex_6);
 
+    // Combine the vertices of the second object
     inv_vertex_0_1 = _mm256_set_m128(inv_vertex_1, inv_vertex_0);
     inv_vertex_2_3 = _mm256_set_m128(inv_vertex_3, inv_vertex_2);
     inv_vertex_4_5 = _mm256_set_m128(inv_vertex_5, inv_vertex_4);
     inv_vertex_6_7 = _mm256_set_m128(inv_vertex_7, inv_vertex_6);
-
+  
+    // Calculate the dot product for the first object
     dp_01 = _mm256_dp_ps(vertex_0_1, dir_v, 113);
     dp_23 = _mm256_dp_ps(vertex_2_3, dir_v, 114);
     dp_45 = _mm256_dp_ps(vertex_4_5, dir_v, 116);
     dp_67 = _mm256_dp_ps(vertex_6_7, dir_v, 120);
 
+    // Calculate the dot product for the second object
     inv_dp_01 = _mm256_dp_ps(inv_vertex_0_1, dir_v, 113);
     inv_dp_23 = _mm256_dp_ps(inv_vertex_2_3, dir_v, 114);
     inv_dp_45 = _mm256_dp_ps(inv_vertex_4_5, dir_v, 116);
     inv_dp_67 = _mm256_dp_ps(inv_vertex_6_7, dir_v, 120);
 
+    // Combine the dot products for the first object
     tmp1 = _mm256_or_ps(dp_01, dp_23);
     tmp2 = _mm256_or_ps(dp_45, dp_67);
     dp0_7 = _mm256_or_ps(tmp1, tmp2);
 
+    // Combine the dot products for the second object
     tmp5 = _mm256_or_ps(inv_dp_01, inv_dp_23);
     tmp6 = _mm256_or_ps(inv_dp_45, inv_dp_67);
     inv_dp0_7 = _mm256_or_ps(tmp5, tmp6);
 
+    // Compute the local dpmax/argmax for the first object
     mask = _mm256_cmp_ps(dp0_7, dpmax_v, _CMP_GT_OS);
     dpmax_v = _mm256_max_ps(dp0_7, dpmax_v);
     tmp3 = _mm256_castps_si256(_mm256_and_ps(mask, _mm256_castsi256_ps(curr_ind_v)));
     tmp4 = _mm256_castps_si256(_mm256_andnot_ps(mask, _mm256_castsi256_ps(argmax_v)));
     argmax_v = _mm256_castps_si256(_mm256_or_ps(_mm256_castsi256_ps(tmp3), _mm256_castsi256_ps(tmp4)));
 
+    // Compute the local dpmin/argmin for the second object
     mask1 = _mm256_cmp_ps(inv_dp0_7, inv_dpmax_v, _CMP_LT_OS);
     inv_dpmax_v = _mm256_min_ps(inv_dp0_7, inv_dpmax_v);
     tmp7 = _mm256_castps_si256(_mm256_and_ps(mask1, _mm256_castsi256_ps(curr_ind_v)));
@@ -598,12 +648,15 @@ int do_intersect3D_vectorized_inlined(const struct CHObject* obj1, const struct 
   }
 
   int k = i;
+  // Set the indices for and traverse the rest of the first object.
   curr_ind_v = _mm256_set_epi32( i - 9, i - 11, i - 13, i - 15, i - 10, i - 12, i - 14, i - 16);
   curr_ind_v_1 = _mm256_set_epi32( i - 1, i - 3, i - 5, i - 7, i - 2, i - 4, i - 6, i - 8);
   for (; i < obj1->num_points - 15; i += 16) {
+    // Compute the indices
     curr_ind_v = _mm256_add_epi32(curr_ind_v, sixteens);
     curr_ind_v_1 = _mm256_add_epi32(curr_ind_v_1, sixteens);
 
+    // Load the vertices of the first object
     vertex_0 = _mm_load_ps(obj1->points[i]);
     vertex_1 = _mm_loadu_ps(obj1->points[i + 1]);
     vertex_2 = _mm_loadu_ps(obj1->points[i + 2]);
@@ -612,7 +665,6 @@ int do_intersect3D_vectorized_inlined(const struct CHObject* obj1, const struct 
     vertex_5 = _mm_loadu_ps(obj1->points[i + 5]);
     vertex_6 = _mm_loadu_ps(obj1->points[i + 6]);
     vertex_7 = _mm_loadu_ps(obj1->points[i + 7]);
-
     vertex_8 = _mm_load_ps(obj1->points[i + 8]);
     vertex_9 = _mm_loadu_ps(obj1->points[i + 9]);
     vertex_10 = _mm_loadu_ps(obj1->points[i + 10]);
@@ -622,26 +674,27 @@ int do_intersect3D_vectorized_inlined(const struct CHObject* obj1, const struct 
     vertex_14 = _mm_loadu_ps(obj1->points[i + 14]);
     vertex_15 = _mm_set_ps(0.0f, obj1->points[i + 15][2], obj1->points[i + 15][1], obj1->points[i + 15][0]);
 
+    // Combine the vertices 
     vertex_0_1 = _mm256_set_m128(vertex_1, vertex_0);
     vertex_2_3 = _mm256_set_m128(vertex_3, vertex_2);
     vertex_4_5 = _mm256_set_m128(vertex_5, vertex_4);
     vertex_6_7 = _mm256_set_m128(vertex_7, vertex_6);
-
     vertex_8_9 = _mm256_set_m128(vertex_9, vertex_8);
     vertex_10_11 = _mm256_set_m128(vertex_11, vertex_10);
     vertex_12_13 = _mm256_set_m128(vertex_13, vertex_12);
     vertex_14_15 = _mm256_set_m128(vertex_15, vertex_14);
 
+    // Compute the dot products
     dp_01 = _mm256_dp_ps(vertex_0_1, dir_v, 113);
     dp_23 = _mm256_dp_ps(vertex_2_3, dir_v, 114);
     dp_45 = _mm256_dp_ps(vertex_4_5, dir_v, 116);
     dp_67 = _mm256_dp_ps(vertex_6_7, dir_v, 120);
-
     dp_89 = _mm256_dp_ps(vertex_8_9, dir_v, 113);
     dp_1011 = _mm256_dp_ps(vertex_10_11, dir_v, 114);
     dp_1213 = _mm256_dp_ps(vertex_12_13, dir_v, 116);
     dp_1415 = _mm256_dp_ps(vertex_14_15, dir_v, 120);
 
+    // Combine the dot products
     tmp1 = _mm256_or_ps(dp_01, dp_23);
     tmp2 = _mm256_or_ps(dp_45, dp_67);
     dp0_7 = _mm256_or_ps(tmp1, tmp2);
@@ -650,12 +703,14 @@ int do_intersect3D_vectorized_inlined(const struct CHObject* obj1, const struct 
     tmp6 = _mm256_or_ps(dp_1213, dp_1415);
     dp8_15 = _mm256_or_ps(tmp5, tmp6);
 
+    // Find the local dpmax/argmax for the firt 8 vertices
     mask = _mm256_cmp_ps(dp0_7, dpmax_v, _CMP_GT_OS);
     dpmax_v = _mm256_max_ps(dp0_7, dpmax_v);
     tmp3 = _mm256_castps_si256(_mm256_and_ps(mask, _mm256_castsi256_ps(curr_ind_v)));
     tmp4 = _mm256_castps_si256(_mm256_andnot_ps(mask, _mm256_castsi256_ps(argmax_v)));
     argmax_v = _mm256_castps_si256(_mm256_or_ps(_mm256_castsi256_ps(tmp3), _mm256_castsi256_ps(tmp4)));
 
+    // Find the local dpmax/argmax for the last 8 vertices
     mask1 = _mm256_cmp_ps(dp8_15, dpmax_v_1, _CMP_GT_OS);
     dpmax_v_1 = _mm256_max_ps(dp8_15, dpmax_v_1);
     tmp7 = _mm256_castps_si256(_mm256_and_ps(mask1, _mm256_castsi256_ps(curr_ind_v_1)));
@@ -663,6 +718,7 @@ int do_intersect3D_vectorized_inlined(const struct CHObject* obj1, const struct 
     argmax_v_1 = _mm256_castps_si256(_mm256_or_ps(_mm256_castsi256_ps(tmp7), _mm256_castsi256_ps(tmp8)));
   }
 
+  // Find the dpmax/argmax
   mask = _mm256_cmp_ps(dpmax_v, dpmax_v_1, _CMP_GT_OS);
   dpmax_v = _mm256_max_ps(dpmax_v, dpmax_v_1);
   tmp3 = _mm256_castps_si256(_mm256_and_ps(mask, _mm256_castsi256_ps(argmax_v)));
@@ -694,10 +750,13 @@ int do_intersect3D_vectorized_inlined(const struct CHObject* obj1, const struct 
 
   float inv_dp, inv_dpmax = 1e9;
   int argmin = 0;
+  // Set the indices and iterate over the remaining points of the second object
   curr_ind_v = _mm256_set_epi32( k - 1, k - 3, k - 5, k - 7, k - 2, k - 4, k - 6, k - 8);
   for (; k < obj2->num_points - 7; k += 8) {
+     // Compute the current indices
     curr_ind_v = _mm256_add_epi32(curr_ind_v, eights);
 
+    // Load the vertices
     inv_vertex_0 = _mm_load_ps(obj2->points[k]);
     inv_vertex_1 = _mm_loadu_ps(obj2->points[k + 1]);
     inv_vertex_2 = _mm_loadu_ps(obj2->points[k + 2]);
@@ -707,20 +766,24 @@ int do_intersect3D_vectorized_inlined(const struct CHObject* obj1, const struct 
     inv_vertex_6 = _mm_loadu_ps(obj2->points[k + 6]);
     inv_vertex_7 = _mm_set_ps(0.0f, obj2->points[k + 7][2], obj2->points[k + 7][1], obj2->points[k + 7][0]);
 
+    // Combine the vertices
     inv_vertex_0_1 = _mm256_set_m128(inv_vertex_1, inv_vertex_0);
     inv_vertex_2_3 = _mm256_set_m128(inv_vertex_3, inv_vertex_2);
     inv_vertex_4_5 = _mm256_set_m128(inv_vertex_5, inv_vertex_4);
     inv_vertex_6_7 = _mm256_set_m128(inv_vertex_7, inv_vertex_6);
 
+    // Compute the dot product
     inv_dp_01 = _mm256_dp_ps(inv_vertex_0_1, dir_v, 113);
     inv_dp_23 = _mm256_dp_ps(inv_vertex_2_3, dir_v, 114);
     inv_dp_45 = _mm256_dp_ps(inv_vertex_4_5, dir_v, 116);
     inv_dp_67 = _mm256_dp_ps(inv_vertex_6_7, dir_v, 120);
 
+    // Combine the dot products
     tmp1 = _mm256_or_ps(inv_dp_01, inv_dp_23);
     tmp2 = _mm256_or_ps(inv_dp_45, inv_dp_67);
     inv_dp0_7 = _mm256_or_ps(tmp1, tmp2);
 
+    // Find the local dpmin/argmin
     mask = _mm256_cmp_ps(inv_dp0_7, inv_dpmax_v, _CMP_LT_OS);
     inv_dpmax_v = _mm256_min_ps(inv_dp0_7, inv_dpmax_v);
     tmp3 = _mm256_castps_si256(_mm256_and_ps(mask, _mm256_castsi256_ps(curr_ind_v)));
@@ -728,6 +791,7 @@ int do_intersect3D_vectorized_inlined(const struct CHObject* obj1, const struct 
     inv_argmin_v = _mm256_castps_si256(_mm256_or_ps(_mm256_castsi256_ps(tmp3), _mm256_castsi256_ps(tmp4)));
   }
 
+   // Find dpmin/argmin
   int argmins[8];
   if (k != 0) {
     _mm256_store_ps(dps, inv_dpmax_v);
@@ -762,8 +826,6 @@ int do_intersect3D_vectorized_inlined(const struct CHObject* obj1, const struct 
 
   int max_iter = 100;  // most likely we need less
   while (max_iter--) {
-    // a = Support(A-B) = Support(A) - Invsup(B)
-
     // Reset variables
     dpmax_v = _mm256_set1_ps(-1e9);
     dpmax_v_1 = _mm256_set1_ps(-1e9);
@@ -781,10 +843,12 @@ int do_intersect3D_vectorized_inlined(const struct CHObject* obj1, const struct 
     dir_v = _mm256_set_ps(0.0f, d[2], d[1], d[0], 0.0f, d[2], d[1], d[0]);
     curr_ind_v = _mm256_set_epi32(-1, -3, -5, -7, -2, -4, -6, -8);
 
-    // Joint loop for
+    // Joint loop
     for (i = 0; i < no_points_min - 7; i += 8) {
+      // Compute current indices
       curr_ind_v = _mm256_add_epi32(curr_ind_v, eights);
 
+      // Load the vertices of the first object
       vertex_0 = _mm_load_ps(obj1->points[i]);
       vertex_1 = _mm_loadu_ps(obj1->points[i + 1]);
       vertex_2 = _mm_loadu_ps(obj1->points[i + 2]);
@@ -794,6 +858,7 @@ int do_intersect3D_vectorized_inlined(const struct CHObject* obj1, const struct 
       vertex_6 = _mm_loadu_ps(obj1->points[i + 6]);
       vertex_7 = _mm_set_ps(0.0f, obj1->points[i + 7][2], obj1->points[i + 7][1], obj1->points[i + 7][0]);//_mm_loadu_ps(obj1->points[i + 7]);
 
+      // Load the vertices of the second object
       inv_vertex_0 = _mm_load_ps(obj2->points[i]);
       inv_vertex_1 = _mm_loadu_ps(obj2->points[i + 1]);
       inv_vertex_2 = _mm_loadu_ps(obj2->points[i + 2]);
@@ -803,40 +868,48 @@ int do_intersect3D_vectorized_inlined(const struct CHObject* obj1, const struct 
       inv_vertex_6 = _mm_loadu_ps(obj2->points[i + 6]);
       inv_vertex_7 = _mm_set_ps(0.0f, obj2->points[i + 7][2], obj2->points[i + 7][1], obj2->points[i + 7][0]);
 
+      // Combine the vertices of the first object
       vertex_0_1 = _mm256_set_m128(vertex_1, vertex_0);
       vertex_2_3 = _mm256_set_m128(vertex_3, vertex_2);
       vertex_4_5 = _mm256_set_m128(vertex_5, vertex_4);
       vertex_6_7 = _mm256_set_m128(vertex_7, vertex_6);
 
+      // Combine the vertices of the second object
       inv_vertex_0_1 = _mm256_set_m128(inv_vertex_1, inv_vertex_0);
       inv_vertex_2_3 = _mm256_set_m128(inv_vertex_3, inv_vertex_2);
       inv_vertex_4_5 = _mm256_set_m128(inv_vertex_5, inv_vertex_4);
       inv_vertex_6_7 = _mm256_set_m128(inv_vertex_7, inv_vertex_6);
 
+      // Compute the dot products for the first object
       dp_01 = _mm256_dp_ps(vertex_0_1, dir_v, 113);
       dp_23 = _mm256_dp_ps(vertex_2_3, dir_v, 114);
       dp_45 = _mm256_dp_ps(vertex_4_5, dir_v, 116);
       dp_67 = _mm256_dp_ps(vertex_6_7, dir_v, 120);
 
+      // Compute the dot products for the second object
       inv_dp_01 = _mm256_dp_ps(inv_vertex_0_1, dir_v, 113);
       inv_dp_23 = _mm256_dp_ps(inv_vertex_2_3, dir_v, 114);
       inv_dp_45 = _mm256_dp_ps(inv_vertex_4_5, dir_v, 116);
       inv_dp_67 = _mm256_dp_ps(inv_vertex_6_7, dir_v, 120);
 
+      // Combine the dot products of the first object
       tmp1 = _mm256_or_ps(dp_01, dp_23);
       tmp2 = _mm256_or_ps(dp_45, dp_67);
       dp0_7 = _mm256_or_ps(tmp1, tmp2);
 
+      // Combine the dot products of the second object
       tmp5 = _mm256_or_ps(inv_dp_01, inv_dp_23);
       tmp6 = _mm256_or_ps(inv_dp_45, inv_dp_67);
       inv_dp0_7 = _mm256_or_ps(tmp5, tmp6);
 
+      // Find local dpmax/argmax
       mask = _mm256_cmp_ps(dp0_7, dpmax_v, _CMP_GT_OS);
       dpmax_v = _mm256_max_ps(dp0_7, dpmax_v);
       tmp3 = _mm256_castps_si256(_mm256_and_ps(mask, _mm256_castsi256_ps(curr_ind_v)));
       tmp4 = _mm256_castps_si256(_mm256_andnot_ps(mask, _mm256_castsi256_ps(argmax_v)));
       argmax_v = _mm256_castps_si256(_mm256_or_ps(_mm256_castsi256_ps(tmp3), _mm256_castsi256_ps(tmp4)));
 
+      // Find local dpmin/argmin
       mask1 = _mm256_cmp_ps(inv_dp0_7, inv_dpmax_v, _CMP_LT_OS);
       inv_dpmax_v = _mm256_min_ps(inv_dp0_7, inv_dpmax_v);
       tmp7 = _mm256_castps_si256(_mm256_and_ps(mask1, _mm256_castsi256_ps(curr_ind_v)));
@@ -845,12 +918,15 @@ int do_intersect3D_vectorized_inlined(const struct CHObject* obj1, const struct 
     }
 
     k = i;
+    // Set the indices and iterate over the remaining indices of the first object.
     curr_ind_v = _mm256_set_epi32( i - 9, i - 11, i - 13, i - 15, i - 10, i - 12, i - 14, i - 16);
     curr_ind_v_1 = _mm256_set_epi32( i - 1, i - 3, i - 5, i - 7, i - 2, i - 4, i - 6, i - 8);
     for (; i < obj1->num_points - 15; i += 16) {
+      // Compute the current indicecs
       curr_ind_v = _mm256_add_epi32(curr_ind_v, sixteens);
       curr_ind_v_1 = _mm256_add_epi32(curr_ind_v_1, sixteens);
 
+      // Load the vertices
       vertex_0 = _mm_load_ps(obj1->points[i]);
       vertex_1 = _mm_loadu_ps(obj1->points[i + 1]);
       vertex_2 = _mm_loadu_ps(obj1->points[i + 2]);
@@ -859,7 +935,6 @@ int do_intersect3D_vectorized_inlined(const struct CHObject* obj1, const struct 
       vertex_5 = _mm_loadu_ps(obj1->points[i + 5]);
       vertex_6 = _mm_loadu_ps(obj1->points[i + 6]);
       vertex_7 = _mm_loadu_ps(obj1->points[i + 7]);
-
       vertex_8 = _mm_load_ps(obj1->points[i + 8]);
       vertex_9 = _mm_loadu_ps(obj1->points[i + 9]);
       vertex_10 = _mm_loadu_ps(obj1->points[i + 10]);
@@ -869,26 +944,27 @@ int do_intersect3D_vectorized_inlined(const struct CHObject* obj1, const struct 
       vertex_14 = _mm_loadu_ps(obj1->points[i + 14]);
       vertex_15 = _mm_set_ps(0.0f, obj1->points[i + 15][2], obj1->points[i + 15][1], obj1->points[i + 15][0]);
 
+      // Combine the vertices
       vertex_0_1 = _mm256_set_m128(vertex_1, vertex_0);
       vertex_2_3 = _mm256_set_m128(vertex_3, vertex_2);
       vertex_4_5 = _mm256_set_m128(vertex_5, vertex_4);
       vertex_6_7 = _mm256_set_m128(vertex_7, vertex_6);
-
       vertex_8_9 = _mm256_set_m128(vertex_9, vertex_8);
       vertex_10_11 = _mm256_set_m128(vertex_11, vertex_10);
       vertex_12_13 = _mm256_set_m128(vertex_13, vertex_12);
       vertex_14_15 = _mm256_set_m128(vertex_15, vertex_14);
 
+      // Compute the dot products
       dp_01 = _mm256_dp_ps(vertex_0_1, dir_v, 113);
       dp_23 = _mm256_dp_ps(vertex_2_3, dir_v, 114);
       dp_45 = _mm256_dp_ps(vertex_4_5, dir_v, 116);
       dp_67 = _mm256_dp_ps(vertex_6_7, dir_v, 120);
-
       dp_89 = _mm256_dp_ps(vertex_8_9, dir_v, 113);
       dp_1011 = _mm256_dp_ps(vertex_10_11, dir_v, 114);
       dp_1213 = _mm256_dp_ps(vertex_12_13, dir_v, 116);
       dp_1415 = _mm256_dp_ps(vertex_14_15, dir_v, 120);
 
+      // Combine the dot prodcuts
       tmp1 = _mm256_or_ps(dp_01, dp_23);
       tmp2 = _mm256_or_ps(dp_45, dp_67);
       dp0_7 = _mm256_or_ps(tmp1, tmp2);
@@ -897,12 +973,14 @@ int do_intersect3D_vectorized_inlined(const struct CHObject* obj1, const struct 
       tmp6 = _mm256_or_ps(dp_1213, dp_1415);
       dp8_15 = _mm256_or_ps(tmp5, tmp6);
 
+      // Find the local dpmax/argmax for the first 8 vertices
       mask = _mm256_cmp_ps(dp0_7, dpmax_v, _CMP_GT_OS);
       dpmax_v = _mm256_max_ps(dp0_7, dpmax_v);
       tmp3 = _mm256_castps_si256(_mm256_and_ps(mask, _mm256_castsi256_ps(curr_ind_v)));
       tmp4 = _mm256_castps_si256(_mm256_andnot_ps(mask, _mm256_castsi256_ps(argmax_v)));
       argmax_v = _mm256_castps_si256(_mm256_or_ps(_mm256_castsi256_ps(tmp3), _mm256_castsi256_ps(tmp4)));
 
+      // Find the local dpmax/argmax for the last 8 vertices
       mask1 = _mm256_cmp_ps(dp8_15, dpmax_v_1, _CMP_GT_OS);
       dpmax_v_1 = _mm256_max_ps(dp8_15, dpmax_v_1);
       tmp7 = _mm256_castps_si256(_mm256_and_ps(mask1, _mm256_castsi256_ps(curr_ind_v_1)));
@@ -910,6 +988,7 @@ int do_intersect3D_vectorized_inlined(const struct CHObject* obj1, const struct 
       argmax_v_1 = _mm256_castps_si256(_mm256_or_ps(_mm256_castsi256_ps(tmp7), _mm256_castsi256_ps(tmp8)));
     }
 
+    // Find the dpmax/argmax
     if (i != 0) {
       mask = _mm256_cmp_ps(dpmax_v, dpmax_v_1, _CMP_GT_OS);
       dpmax_v = _mm256_max_ps(dpmax_v, dpmax_v_1);
@@ -937,10 +1016,13 @@ int do_intersect3D_vectorized_inlined(const struct CHObject* obj1, const struct 
       }
     }
 
+    // Set the indices and iterate over the remaining points of the second object
     curr_ind_v = _mm256_set_epi32( k - 1, k - 3, k - 5, k - 7, k - 2, k - 4, k - 6, k - 8);
     for (; k < obj2->num_points - 7; k += 8) {
+      // Compute the indices
       curr_ind_v = _mm256_add_epi32(curr_ind_v, eights);
 
+      // Load the vertices
       inv_vertex_0 = _mm_load_ps(obj2->points[k]);
       inv_vertex_1 = _mm_loadu_ps(obj2->points[k + 1]);
       inv_vertex_2 = _mm_loadu_ps(obj2->points[k + 2]);
@@ -950,20 +1032,24 @@ int do_intersect3D_vectorized_inlined(const struct CHObject* obj1, const struct 
       inv_vertex_6 = _mm_loadu_ps(obj2->points[k + 6]);
       inv_vertex_7 = _mm_set_ps(0.0f, obj2->points[i + 7][2], obj2->points[i + 7][1], obj2->points[i + 7][0]);
 
+      // Combine the vertices
       inv_vertex_0_1 = _mm256_set_m128(inv_vertex_1, inv_vertex_0);
       inv_vertex_2_3 = _mm256_set_m128(inv_vertex_3, inv_vertex_2);
       inv_vertex_4_5 = _mm256_set_m128(inv_vertex_5, inv_vertex_4);
       inv_vertex_6_7 = _mm256_set_m128(inv_vertex_7, inv_vertex_6);
 
+      // Compute the dot product
       inv_dp_01 = _mm256_dp_ps(inv_vertex_0_1, dir_v, 113);
       inv_dp_23 = _mm256_dp_ps(inv_vertex_2_3, dir_v, 114);
       inv_dp_45 = _mm256_dp_ps(inv_vertex_4_5, dir_v, 116);
       inv_dp_67 = _mm256_dp_ps(inv_vertex_6_7, dir_v, 120);
 
+      // Combine the dot products
       tmp1 = _mm256_or_ps(inv_dp_01, inv_dp_23);
       tmp2 = _mm256_or_ps(inv_dp_45, inv_dp_67);
       inv_dp0_7 = _mm256_or_ps(tmp1, tmp2);
 
+      // Find local dpmin/argmin
       mask = _mm256_cmp_ps(inv_dp0_7, inv_dpmax_v, _CMP_LT_OS);
       inv_dpmax_v = _mm256_min_ps(inv_dp0_7, inv_dpmax_v);
       tmp3 = _mm256_castps_si256(_mm256_and_ps(mask, _mm256_castsi256_ps(curr_ind_v)));
@@ -971,6 +1057,7 @@ int do_intersect3D_vectorized_inlined(const struct CHObject* obj1, const struct 
       inv_argmin_v = _mm256_castps_si256(_mm256_or_ps(_mm256_castsi256_ps(tmp3), _mm256_castsi256_ps(tmp4)));
     }
 
+    // Find the dpmin/argmin
     if (k != 0) {
       int argmins[8];
       _mm256_store_ps(dps, inv_dpmax_v);
@@ -993,6 +1080,7 @@ int do_intersect3D_vectorized_inlined(const struct CHObject* obj1, const struct 
       }
     }
 
+    // a = Support(A-B) = Support(A) - Invsup(B)
     a[0] = obj1->points[argmax][0] - obj2->points[argmin][0];
     a[1] = obj1->points[argmax][1] - obj2->points[argmin][1];
     a[2] = obj1->points[argmax][2] - obj2->points[argmin][2];
