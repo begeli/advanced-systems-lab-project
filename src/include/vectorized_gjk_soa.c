@@ -22,41 +22,54 @@ void cross3D_soa_vectorized(const float *x, const float *y, float *res) {
 
 /**
  * Among a set of N points in 3D, find the point furthest along dir.
- * TODO can we do this more efficiently than brute force?
  * */
 [[gnu::target("avx512dq")]]
 void support3D_soa_v_slow_idx(float** points, const float *dir, float *res, int N) {
   __m512 vertex_x_coord_0, vertex_y_coord_0, vertex_z_coord_0;
+  
+  // Variables used to compute dot product
   __m512 tmp_0, tmp_1, tmp_2, dp_v;
+  
+  // Variables used to find argmax
   __m512i tmp_3, tmp_4;
+  
   __m512 dpmax_v = _mm512_set1_ps(-1e9);
   __m512i argmax_v = _mm512_set1_epi32(0);
   __m512i curr_idx;
 
+  // Direction vector
   __m512 dir_x = _mm512_set1_ps(dir[0]);
   __m512 dir_y = _mm512_set1_ps(dir[1]);
   __m512 dir_z = _mm512_set1_ps(dir[2]);
+  
+  // Used to compute dpmax/argmax
   __m512i ones = _mm512_set1_epi32(-1);
   __m512i zeros = _mm512_set1_epi32(0);
-  __m512i sixteens = _mm512_set1_epi32(16);
   __mmask16 mask_0;
+  
+  // Used to compute current indices
+  __m512i sixteens = _mm512_set1_epi32(16);
 
   float dp, dpmax = -1e9;
   int argmax = 0;
 
   int i = 0;
   for (i = 0; i < N - 15; i += 16) {
+    // Compute current indices
     curr_idx = _mm512_set_epi32(i + 15, i + 14, i + 13, i + 12, i + 11, i + 10, i + 9, i + 8,
                              i + 7, i + 6, i + 5, i + 4, i + 3, i + 2, i + 1, i);
 
+    // Load vertices
     vertex_x_coord_0 = _mm512_loadu_ps(&points[0][i]);
     vertex_y_coord_0 = _mm512_loadu_ps(&points[1][i]);
     vertex_z_coord_0 = _mm512_loadu_ps(&points[2][i]);
-
+  
+    // Compute dot product
     tmp_0 = _mm512_mul_ps(vertex_x_coord_0, dir_x);
     tmp_1 = _mm512_fmadd_ps(dir_y, vertex_y_coord_0, tmp_0);
     dp_v = _mm512_fmadd_ps(dir_z, vertex_z_coord_0, tmp_1);
 
+    // Find local dpmax/argmax
     mask_0 = _mm512_cmp_ps_mask(dp_v, dpmax_v, _CMP_GT_OQ);
     dpmax_v = _mm512_max_ps(dp_v, dpmax_v);
     tmp_3 = _mm512_mask_and_epi32(zeros, mask_0, curr_idx, ones);
@@ -64,6 +77,7 @@ void support3D_soa_v_slow_idx(float** points, const float *dir, float *res, int 
     argmax_v = _mm512_or_epi32(tmp_3, tmp_4);
   }
 
+   // Find dpmax/argmax
   if (i != 0) {
     float dps[16];
     int argmaxs[16];
@@ -94,35 +108,49 @@ void support3D_soa_v_slow_idx(float** points, const float *dir, float *res, int 
 [[gnu::target("avx512dq")]]
 void support3D_soa_vectorized(float** points, const float *dir, float *res, int N) {
   __m512 vertex_x_coord_0, vertex_y_coord_0, vertex_z_coord_0;
+  
+  // Variables used to compute dot product
   __m512 tmp_0, tmp_1, tmp_2, dp_v;
+  
+  // Variables used to compute argmax
   __m512i tmp_3, tmp_4;
+  
   __m512 dpmax_v = _mm512_set1_ps(-1e9);
   __m512i argmax_v = _mm512_set1_epi32(0);
   __m512i curr_idx = _mm512_set_epi32(-1, -2, -3, -4, -5, -6, -7, -8,
                                       -9, -10, -11, -12, -13, -14, -15, -16);
+   
+  // Direction vector
   __m512 dir_x = _mm512_set1_ps(dir[0]);
   __m512 dir_y = _mm512_set1_ps(dir[1]);
   __m512 dir_z = _mm512_set1_ps(dir[2]);
+  
+  // Variables used to compute argmax
   __m512i ones = _mm512_set1_epi32(-1);
   __m512i zeros = _mm512_set1_epi32(0);
-  __m512i sixteens = _mm512_set1_epi32(16);
   __mmask16 mask_0;
+  
+  __m512i sixteens = _mm512_set1_epi32(16);
 
   float dp, dpmax = -1e9;
   int argmax = 0;
 
   int i = 0;
   for (i = 0; i < N - 15; i += 16) {
+    // Compute current indices
     curr_idx = _mm512_add_epi32(curr_idx, sixteens);
 
+    // Load current vertices
     vertex_x_coord_0 = _mm512_loadu_ps(&points[0][i]);
     vertex_y_coord_0 = _mm512_loadu_ps(&points[1][i]);
     vertex_z_coord_0 = _mm512_loadu_ps(&points[2][i]);
 
+    // Compute dot product
     tmp_0 = _mm512_mul_ps(vertex_x_coord_0, dir_x);
     tmp_1 = _mm512_fmadd_ps(dir_y, vertex_y_coord_0, tmp_0);
     dp_v = _mm512_fmadd_ps(dir_z, vertex_z_coord_0, tmp_1);
 
+    // Find local dpmax/argmax
     mask_0 = _mm512_cmp_ps_mask(dp_v, dpmax_v, _CMP_GT_OQ);
     dpmax_v = _mm512_max_ps(dp_v, dpmax_v);
     tmp_3 = _mm512_mask_and_epi32(zeros, mask_0, curr_idx, ones);
@@ -130,6 +158,7 @@ void support3D_soa_vectorized(float** points, const float *dir, float *res, int 
     argmax_v = _mm512_or_epi32(tmp_3, tmp_4);
   }
 
+  // Find dpmax/argmax
   if (i != 0) {
     float dps[16];
     int argmaxs[16];
@@ -191,9 +220,11 @@ void support3D_soa_vectorized_lu2(float** points, const float *dir, float *res, 
 
   int i = 0;
   for (i = 0; i < N - 31; i += 32) {
+    // Compute current indices
     curr_idx = _mm512_add_epi32(curr_idx, thirtytwos);
     curr_idx_1 = _mm512_add_epi32(curr_idx_1, thirtytwos);
 
+    // Load current vertices
     vertex_x_coord_0 = _mm512_loadu_ps(&points[0][i]);
     vertex_y_coord_0 = _mm512_loadu_ps(&points[1][i]);
     vertex_z_coord_0 = _mm512_loadu_ps(&points[2][i]);
@@ -202,6 +233,7 @@ void support3D_soa_vectorized_lu2(float** points, const float *dir, float *res, 
     vertex_y_coord_1 = _mm512_loadu_ps(&points[1][i + 16]);
     vertex_z_coord_1 = _mm512_loadu_ps(&points[2][i + 16]);
 
+    // Compute dot products
     tmp_0 = _mm512_mul_ps(vertex_x_coord_0, dir_x);
     tmp_1 = _mm512_fmadd_ps(dir_y, vertex_y_coord_0, tmp_0);
     dp_v = _mm512_fmadd_ps(dir_z, vertex_z_coord_0, tmp_1);
@@ -210,6 +242,7 @@ void support3D_soa_vectorized_lu2(float** points, const float *dir, float *res, 
     tmp_6 = _mm512_fmadd_ps(dir_y, vertex_y_coord_1, tmp_5);
     dp_v_1 = _mm512_fmadd_ps(dir_z, vertex_z_coord_1, tmp_6);
 
+    // Find local dpmax/argmax
     mask_0 = _mm512_cmp_ps_mask(dp_v, dpmax_v, _CMP_GT_OQ);
     dpmax_v = _mm512_max_ps(dp_v, dpmax_v);
     tmp_3 = _mm512_mask_and_epi32(zeros, mask_0, curr_idx, ones);
@@ -223,6 +256,7 @@ void support3D_soa_vectorized_lu2(float** points, const float *dir, float *res, 
     argmax_v_1 = _mm512_or_epi32(tmp_8, tmp_9);
   }
 
+  // Find dpmax/argmax
   if (i != 0) {
     mask_0 = _mm512_cmp_ps_mask(dpmax_v, dpmax_v_1, _CMP_GT_OQ);
     dpmax_v = _mm512_max_ps(dpmax_v, dpmax_v_1);
@@ -285,17 +319,21 @@ void invsup3D_soa_v_slow_idx(float** points, const float *dir, float *res, int N
   int argmin = 0;
   int k;
   for (k = 0; k < N - 15; k += 16) {
+    // Compute current indices
     curr_idx = _mm512_set_epi32(k + 15, k + 14, k + 13, k + 12, k + 11, k + 10, k + 9, k + 8,
                                 k + 7, k + 6, k + 5, k + 4, k + 3, k + 2, k + 1, k);
 
+    // Load vertices
     inv_vertex_x_coord_0 = _mm512_loadu_ps(&points[0][k]);
     inv_vertex_y_coord_0 = _mm512_loadu_ps(&points[1][k]);
     inv_vertex_z_coord_0 = _mm512_loadu_ps(&points[2][k]);
 
+    // Compute dot products
     inv_tmp_0 = _mm512_mul_ps(inv_vertex_x_coord_0, dir_x);
     inv_tmp_1 = _mm512_fmadd_ps(dir_y, inv_vertex_y_coord_0, inv_tmp_0);
     inv_dp_v = _mm512_fmadd_ps(dir_z, inv_vertex_z_coord_0, inv_tmp_1);
 
+    // Find local argmin/dpmin
     mask_0 = _mm512_cmp_ps_mask(inv_dp_v, inv_dpmax_v, _CMP_LT_OS);
     inv_dpmax_v = _mm512_min_ps(inv_dp_v, inv_dpmax_v);
     inv_tmp_3 = _mm512_mask_and_epi32(zeros, mask_0, curr_idx, ones);
@@ -303,6 +341,7 @@ void invsup3D_soa_v_slow_idx(float** points, const float *dir, float *res, int N
     inv_argmin_v = _mm512_or_epi32(inv_tmp_3, inv_tmp_4);
   }
 
+  // Find dpmin/argmin
   if (k != 0) {
     float inv_dps[16];
     int argmins[16];
@@ -352,16 +391,20 @@ void invsup3D_soa_vectorized(float** points, const float *dir, float *res, int N
   int argmin = 0;
   int k;
   for (k = 0; k < N - 15; k += 16) {
+    // Compute current indices
     curr_idx = _mm512_add_epi32(curr_idx, sixteens);
 
+    // Load vertices
     inv_vertex_x_coord_0 = _mm512_loadu_ps(&points[0][k]);
     inv_vertex_y_coord_0 = _mm512_loadu_ps(&points[1][k]);
     inv_vertex_z_coord_0 = _mm512_loadu_ps(&points[2][k]);
-
+  
+    // Compute dot product
     inv_tmp_0 = _mm512_mul_ps(inv_vertex_x_coord_0, dir_x);
     inv_tmp_1 = _mm512_fmadd_ps(dir_y, inv_vertex_y_coord_0, inv_tmp_0);
     inv_dp_v = _mm512_fmadd_ps(dir_z, inv_vertex_z_coord_0, inv_tmp_1);
 
+    // Find local dpmin/argmin
     mask_0 = _mm512_cmp_ps_mask(inv_dp_v, inv_dpmax_v, _CMP_LT_OS);
     inv_dpmax_v = _mm512_min_ps(inv_dp_v, inv_dpmax_v);
     inv_tmp_3 = _mm512_mask_and_epi32(zeros, mask_0, curr_idx, ones);
@@ -369,6 +412,7 @@ void invsup3D_soa_vectorized(float** points, const float *dir, float *res, int N
     inv_argmin_v = _mm512_or_epi32(inv_tmp_3, inv_tmp_4);
   }
 
+  // Find dpmin/argmin
   if (k != 0) {
     float inv_dps[16];
     int argmins[16];
@@ -430,9 +474,11 @@ void invsup3D_soa_vectorized_lu2(float** points, const float *dir, float *res, i
   int argmin = 0;
   int k;
   for (k = 0; k < N - 31; k += 32) {
+    // Compute current indices
     curr_idx = _mm512_add_epi32(curr_idx, thirtytwos);
     curr_idx_1 = _mm512_add_epi32(curr_idx_1, thirtytwos);
 
+    // Load vertices
     inv_vertex_x_coord_0 = _mm512_loadu_ps(&points[0][k]);
     inv_vertex_y_coord_0 = _mm512_loadu_ps(&points[1][k]);
     inv_vertex_z_coord_0 = _mm512_loadu_ps(&points[2][k]);
@@ -441,6 +487,7 @@ void invsup3D_soa_vectorized_lu2(float** points, const float *dir, float *res, i
     inv_vertex_y_coord_1 = _mm512_loadu_ps(&points[1][k + 16]);
     inv_vertex_z_coord_1 = _mm512_loadu_ps(&points[2][k + 16]);
 
+    // Compute dot products
     inv_tmp_0 = _mm512_mul_ps(inv_vertex_x_coord_0, dir_x);
     inv_tmp_1 = _mm512_fmadd_ps(dir_y, inv_vertex_y_coord_0, inv_tmp_0);
     inv_dp_v = _mm512_fmadd_ps(dir_z, inv_vertex_z_coord_0, inv_tmp_1);
@@ -449,6 +496,7 @@ void invsup3D_soa_vectorized_lu2(float** points, const float *dir, float *res, i
     inv_tmp_6 = _mm512_fmadd_ps(dir_y, inv_vertex_y_coord_1, inv_tmp_5);
     inv_dp_v = _mm512_fmadd_ps(dir_z, inv_vertex_z_coord_1, inv_tmp_6);
 
+    // Find local dpmin/argmin
     mask_0 = _mm512_cmp_ps_mask(inv_dp_v, inv_dpmax_v, _CMP_LT_OQ);
     inv_dpmax_v = _mm512_min_ps(inv_dp_v, inv_dpmax_v);
     inv_tmp_3 = _mm512_mask_and_epi32(zeros, mask_0, curr_idx, ones);
@@ -462,6 +510,7 @@ void invsup3D_soa_vectorized_lu2(float** points, const float *dir, float *res, i
     inv_argmin_v_1 = _mm512_or_epi32(inv_tmp_8, inv_tmp_9);
   }
 
+  // Find dpmin/argmin
   if (k != 0) {
     mask_0 = _mm512_cmp_ps_mask(inv_dpmax_v, inv_dpmax_v_1, _CMP_LT_OQ);
     inv_dpmax_v = _mm512_min_ps(inv_dpmax_v, inv_dpmax_v_1);
@@ -851,10 +900,13 @@ int do_intersect3D_soa_v_slow_idx_inlined(const struct CHObject_soa* obj1, const
   __m512i sixteens = _mm512_set1_epi32(16);
 
   int i;
+  // Joint loop
   for (i = 0; i < no_points_min - 15; i += 16) {
+    // Compute current indices
     curr_idx = _mm512_set_epi32(i + 15, i + 14, i + 13, i + 12, i + 11, i + 10, i + 9, i + 8,
                                 i + 7, i + 6, i + 5, i + 4, i + 3, i + 2, i + 1, i);
 
+    // Load vertices
     vertex_x_coord_0 = _mm512_loadu_ps(&obj1->points[0][i]);
     vertex_y_coord_0 = _mm512_loadu_ps(&obj1->points[1][i]);
     vertex_z_coord_0 = _mm512_loadu_ps(&obj1->points[2][i]);
@@ -863,6 +915,7 @@ int do_intersect3D_soa_v_slow_idx_inlined(const struct CHObject_soa* obj1, const
     inv_vertex_y_coord_0 = _mm512_loadu_ps(&obj2->points[1][i]);
     inv_vertex_z_coord_0 = _mm512_loadu_ps(&obj2->points[2][i]);
 
+    // Compute dot products
     tmp_0 = _mm512_mul_ps(vertex_x_coord_0, dir_x);
     tmp_1 = _mm512_fmadd_ps(dir_y, vertex_y_coord_0, tmp_0);
     dp_v = _mm512_fmadd_ps(dir_z, vertex_z_coord_0, tmp_1);
@@ -871,12 +924,14 @@ int do_intersect3D_soa_v_slow_idx_inlined(const struct CHObject_soa* obj1, const
     inv_tmp_1 = _mm512_fmadd_ps(dir_y, inv_vertex_y_coord_0, inv_tmp_0);
     inv_dp_v = _mm512_fmadd_ps(dir_z, inv_vertex_z_coord_0, inv_tmp_1);
 
+    // Find local dpmax/argmax
     mask_0 = _mm512_cmp_ps_mask(dp_v, dpmax_v, _CMP_GT_OQ);
     dpmax_v = _mm512_max_ps(dp_v, dpmax_v);
     tmp_3 = _mm512_mask_and_epi32(zeros, mask_0, curr_idx, ones);
     tmp_4 = _mm512_mask_andnot_epi32(argmax_v, mask_0, ones, argmax_v);
     argmax_v = _mm512_or_epi32(tmp_3, tmp_4);
 
+    // Find local dpmin/argmin
     mask_1 = _mm512_cmp_ps_mask(inv_dp_v, inv_dpmax_v, _CMP_LT_OS);
     inv_dpmax_v = _mm512_min_ps(inv_dp_v, inv_dpmax_v);
     inv_tmp_3 = _mm512_mask_and_epi32(zeros, mask_1, curr_idx, ones);
@@ -885,18 +940,23 @@ int do_intersect3D_soa_v_slow_idx_inlined(const struct CHObject_soa* obj1, const
   }
 
   int k = i;
+  // Iterate over the remaining points of the first object
   for (; i < obj1->num_points - 15; i += 16) {
+    // Compute current indices
     curr_idx = _mm512_set_epi32(i + 15, i + 14, i + 13, i + 12, i + 11, i + 10, i + 9, i + 8,
                                 i + 7, i + 6, i + 5, i + 4, i + 3, i + 2, i + 1, i);
 
+    // Load vertices
     vertex_x_coord_0 = _mm512_loadu_ps(&obj1->points[0][i]);
     vertex_y_coord_0 = _mm512_loadu_ps(&obj1->points[1][i]);
     vertex_z_coord_0 = _mm512_loadu_ps(&obj1->points[2][i]);
 
+    // Compute dot products
     tmp_0 = _mm512_mul_ps(vertex_x_coord_0, dir_x);
     tmp_1 = _mm512_fmadd_ps(dir_y, vertex_y_coord_0, tmp_0);
     dp_v = _mm512_fmadd_ps(dir_z, vertex_z_coord_0, tmp_1);
 
+    // Find local dpmax/argmax
     mask_0 = _mm512_cmp_ps_mask(dp_v, dpmax_v, _CMP_GT_OQ);
     dpmax_v = _mm512_max_ps(dp_v, dpmax_v);
     tmp_3 = _mm512_mask_and_epi32(zeros, mask_0, curr_idx, ones);
@@ -904,6 +964,7 @@ int do_intersect3D_soa_v_slow_idx_inlined(const struct CHObject_soa* obj1, const
     argmax_v = _mm512_or_epi32(tmp_3, tmp_4);
   }
 
+  // Find dpmax/argmax
   if (i != 0) {
     float dps[16];
     int argmaxs[16];
@@ -918,6 +979,7 @@ int do_intersect3D_soa_v_slow_idx_inlined(const struct CHObject_soa* obj1, const
     }
   }
 
+  // Handle remaining cases
   for (; i < obj1->num_points; i++) {
     dp = dot3D_soa_vectorized(obj1->points[0][i], obj1->points[1][i], obj1->points[2][i], d);
     if (dp > dpmax) {
@@ -926,18 +988,23 @@ int do_intersect3D_soa_v_slow_idx_inlined(const struct CHObject_soa* obj1, const
     }
   }
 
+  // Iterate over the remaining points of the second object
   for (; k < obj2->num_points - 15; k += 16) {
+    // Compute current indices
     curr_idx = _mm512_set_epi32(k + 15, k + 14, k + 13, k + 12, k + 11, k + 10, k + 9, k + 8,
                                 k + 7, k + 6, k + 5, k + 4, k + 3, k + 2, k + 1, k);
 
+    // Load vertices
     inv_vertex_x_coord_0 = _mm512_loadu_ps(&obj2->points[0][k]);
     inv_vertex_y_coord_0 = _mm512_loadu_ps(&obj2->points[1][k]);
     inv_vertex_z_coord_0 = _mm512_loadu_ps(&obj2->points[2][k]);
 
+    // Compute dot product
     inv_tmp_0 = _mm512_mul_ps(inv_vertex_x_coord_0, dir_x);
     inv_tmp_1 = _mm512_fmadd_ps(dir_y, inv_vertex_y_coord_0, inv_tmp_0);
     inv_dp_v = _mm512_fmadd_ps(dir_z, inv_vertex_z_coord_0, inv_tmp_1);
 
+    // Find local dpmin/argmin
     mask_1 = _mm512_cmp_ps_mask(inv_dp_v, inv_dpmax_v, _CMP_LT_OS);
     inv_dpmax_v = _mm512_min_ps(inv_dp_v, inv_dpmax_v);
     inv_tmp_3 = _mm512_mask_and_epi32(zeros, mask_1, curr_idx, ones);
@@ -945,6 +1012,7 @@ int do_intersect3D_soa_v_slow_idx_inlined(const struct CHObject_soa* obj1, const
     inv_argmin_v = _mm512_or_epi32(inv_tmp_3, inv_tmp_4);
   }
 
+  // Find dpmin/argmin
   if (k != 0) {
     float inv_dps[16];
     int argmins[16];
@@ -960,6 +1028,7 @@ int do_intersect3D_soa_v_slow_idx_inlined(const struct CHObject_soa* obj1, const
     }
   }
 
+  // Handle remaining cases
   for (; k < obj2->num_points; k++) {
     inv_dp = dot3D_soa_vectorized(obj2->points[0][k], obj2->points[1][k], obj2->points[2][k], d);
     if (inv_dp < inv_dpmax) {
@@ -996,10 +1065,13 @@ int do_intersect3D_soa_v_slow_idx_inlined(const struct CHObject_soa* obj1, const
     dir_y = _mm512_set1_ps(d[1]);
     dir_z = _mm512_set1_ps(d[2]);
 
+    // Joint loop
     for (i = 0; i < no_points_min - 15; i += 16) {
+      // Compute current indices
       curr_idx = _mm512_set_epi32(i + 15, i + 14, i + 13, i + 12, i + 11, i + 10, i + 9, i + 8,
                                   i + 7, i + 6, i + 5, i + 4, i + 3, i + 2, i + 1, i);
 
+      // Load vertices
       vertex_x_coord_0 = _mm512_loadu_ps(&obj1->points[0][i]);
       vertex_y_coord_0 = _mm512_loadu_ps(&obj1->points[1][i]);
       vertex_z_coord_0 = _mm512_loadu_ps(&obj1->points[2][i]);
@@ -1008,6 +1080,7 @@ int do_intersect3D_soa_v_slow_idx_inlined(const struct CHObject_soa* obj1, const
       inv_vertex_y_coord_0 = _mm512_loadu_ps(&obj2->points[1][i]);
       inv_vertex_z_coord_0 = _mm512_loadu_ps(&obj2->points[2][i]);
 
+      // Compute dot products
       tmp_0 = _mm512_mul_ps(vertex_x_coord_0, dir_x);
       tmp_1 = _mm512_fmadd_ps(dir_y, vertex_y_coord_0, tmp_0);
       dp_v = _mm512_fmadd_ps(dir_z, vertex_z_coord_0, tmp_1);
@@ -1016,12 +1089,14 @@ int do_intersect3D_soa_v_slow_idx_inlined(const struct CHObject_soa* obj1, const
       inv_tmp_1 = _mm512_fmadd_ps(dir_y, inv_vertex_y_coord_0, inv_tmp_0);
       inv_dp_v = _mm512_fmadd_ps(dir_z, inv_vertex_z_coord_0, inv_tmp_1);
 
+      // Find local dpmax/argmax
       mask_0 = _mm512_cmp_ps_mask(dp_v, dpmax_v, _CMP_GT_OQ);
       dpmax_v = _mm512_max_ps(dp_v, dpmax_v);
       tmp_3 = _mm512_mask_and_epi32(zeros, mask_0, curr_idx, ones);
       tmp_4 = _mm512_mask_andnot_epi32(argmax_v, mask_0, ones, argmax_v);
       argmax_v = _mm512_or_epi32(tmp_3, tmp_4);
 
+      // Find local dpmin/argmin
       mask_1 = _mm512_cmp_ps_mask(inv_dp_v, inv_dpmax_v, _CMP_LT_OS);
       inv_dpmax_v = _mm512_min_ps(inv_dp_v, inv_dpmax_v);
       inv_tmp_3 = _mm512_mask_and_epi32(zeros, mask_1, curr_idx, ones);
@@ -1030,18 +1105,23 @@ int do_intersect3D_soa_v_slow_idx_inlined(const struct CHObject_soa* obj1, const
     }
 
     k = i;
+    // Iterate over the remaining points of the first object
     for (; i < obj1->num_points - 15; i += 16) {
+      // Compute current indices
       curr_idx = _mm512_set_epi32(i + 15, i + 14, i + 13, i + 12, i + 11, i + 10, i + 9, i + 8,
                                   i + 7, i + 6, i + 5, i + 4, i + 3, i + 2, i + 1, i);
 
+      // Load vertices
       vertex_x_coord_0 = _mm512_loadu_ps(&obj1->points[0][i]);
       vertex_y_coord_0 = _mm512_loadu_ps(&obj1->points[1][i]);
       vertex_z_coord_0 = _mm512_loadu_ps(&obj1->points[2][i]);
 
+      // Compute dot products
       tmp_0 = _mm512_mul_ps(vertex_x_coord_0, dir_x);
       tmp_1 = _mm512_fmadd_ps(dir_y, vertex_y_coord_0, tmp_0);
       dp_v = _mm512_fmadd_ps(dir_z, vertex_z_coord_0, tmp_1);
 
+      // Find local dpmax/argmax
       mask_0 = _mm512_cmp_ps_mask(dp_v, dpmax_v, _CMP_GT_OQ);
       dpmax_v = _mm512_max_ps(dp_v, dpmax_v);
       tmp_3 = _mm512_mask_and_epi32(zeros, mask_0, curr_idx, ones);
@@ -1049,6 +1129,7 @@ int do_intersect3D_soa_v_slow_idx_inlined(const struct CHObject_soa* obj1, const
       argmax_v = _mm512_or_epi32(tmp_3, tmp_4);
     }
 
+    // Find dpmax/argmax
     if (i != 0) {
       float dps[16];
       int argmaxs[16];
@@ -1063,6 +1144,7 @@ int do_intersect3D_soa_v_slow_idx_inlined(const struct CHObject_soa* obj1, const
       }
     }
 
+    // Handle remaining cases
     for (; i < obj1->num_points; i++) {
       dp = dot3D_soa_vectorized(obj1->points[0][i], obj1->points[1][i], obj1->points[2][i], d);
       if (dp > dpmax) {
@@ -1071,18 +1153,23 @@ int do_intersect3D_soa_v_slow_idx_inlined(const struct CHObject_soa* obj1, const
       }
     }
 
+    // Iterate over the remaining points of the second object
     for (; k < obj2->num_points - 15; k += 16) {
+      // Compute the current indices
       curr_idx = _mm512_set_epi32(k + 15, k + 14, k + 13, k + 12, k + 11, k + 10, k + 9, k + 8,
                                   k + 7, k + 6, k + 5, k + 4, k + 3, k + 2, k + 1, k);
 
+      // Load the vertices
       inv_vertex_x_coord_0 = _mm512_loadu_ps(&obj2->points[0][k]);
       inv_vertex_y_coord_0 = _mm512_loadu_ps(&obj2->points[1][k]);
       inv_vertex_z_coord_0 = _mm512_loadu_ps(&obj2->points[2][k]);
 
+      // Compute the dot product
       inv_tmp_0 = _mm512_mul_ps(inv_vertex_x_coord_0, dir_x);
       inv_tmp_1 = _mm512_fmadd_ps(dir_y, inv_vertex_y_coord_0, inv_tmp_0);
       inv_dp_v = _mm512_fmadd_ps(dir_z, inv_vertex_z_coord_0, inv_tmp_1);
 
+      // Find local dpmin/argmin
       mask_1 = _mm512_cmp_ps_mask(inv_dp_v, inv_dpmax_v, _CMP_LT_OS);
       inv_dpmax_v = _mm512_min_ps(inv_dp_v, inv_dpmax_v);
       inv_tmp_3 = _mm512_mask_and_epi32(zeros, mask_1, curr_idx, ones);
@@ -1090,6 +1177,7 @@ int do_intersect3D_soa_v_slow_idx_inlined(const struct CHObject_soa* obj1, const
       inv_argmin_v = _mm512_or_epi32(inv_tmp_3, inv_tmp_4);
     }
 
+    // Find dpmin/argmin 
     if (k != 0) {
       float inv_dps[16];
       int argmins[16];
@@ -1105,6 +1193,7 @@ int do_intersect3D_soa_v_slow_idx_inlined(const struct CHObject_soa* obj1, const
       }
     }
 
+    // Handle remaining cases
     for (; k < obj2->num_points; k++) {
       inv_dp = dot3D_soa_vectorized(obj2->points[0][k], obj2->points[1][k], obj2->points[2][k], d);
       if (inv_dp < inv_dpmax) {
@@ -1112,7 +1201,8 @@ int do_intersect3D_soa_v_slow_idx_inlined(const struct CHObject_soa* obj1, const
         argmin = k;
       }
     }
-
+    
+    // a = Support(A-B) = Support(A) - Invsup(B)
     a[0] = obj1->points[0][argmax] - obj2->points[0][argmin];
     a[1] = obj1->points[1][argmax] - obj2->points[1][argmin];
     a[2] = obj1->points[2][argmax] - obj2->points[2][argmin];
@@ -1177,9 +1267,12 @@ int do_intersect3D_soa_vectorized_inlined(const struct CHObject_soa* obj1, const
   __m512i sixteens = _mm512_set1_epi32(16);
 
   int i;
+  // Joint loop
   for (i = 0; i < no_points_min - 15; i += 16) {
+    // Compute the current indices
     curr_idx = _mm512_add_epi32(curr_idx, sixteens);
 
+    // Load the vertices
     vertex_x_coord_0 = _mm512_loadu_ps(&obj1->points[0][i]);
     vertex_y_coord_0 = _mm512_loadu_ps(&obj1->points[1][i]);
     vertex_z_coord_0 = _mm512_loadu_ps(&obj1->points[2][i]);
@@ -1188,6 +1281,7 @@ int do_intersect3D_soa_vectorized_inlined(const struct CHObject_soa* obj1, const
     inv_vertex_y_coord_0 = _mm512_loadu_ps(&obj2->points[1][i]);
     inv_vertex_z_coord_0 = _mm512_loadu_ps(&obj2->points[2][i]);
 
+    // Compute dot products
     tmp_0 = _mm512_mul_ps(vertex_x_coord_0, dir_x);
     tmp_1 = _mm512_fmadd_ps(dir_y, vertex_y_coord_0, tmp_0);
     dp_v = _mm512_fmadd_ps(dir_z, vertex_z_coord_0, tmp_1);
@@ -1196,12 +1290,14 @@ int do_intersect3D_soa_vectorized_inlined(const struct CHObject_soa* obj1, const
     inv_tmp_1 = _mm512_fmadd_ps(dir_y, inv_vertex_y_coord_0, inv_tmp_0);
     inv_dp_v = _mm512_fmadd_ps(dir_z, inv_vertex_z_coord_0, inv_tmp_1);
 
+    // Find local dpmax/argmax
     mask_0 = _mm512_cmp_ps_mask(dp_v, dpmax_v, _CMP_GT_OQ);
     dpmax_v = _mm512_max_ps(dp_v, dpmax_v);
     tmp_3 = _mm512_mask_and_epi32(zeros, mask_0, curr_idx, ones);
     tmp_4 = _mm512_mask_andnot_epi32(argmax_v, mask_0, ones, argmax_v);
     argmax_v = _mm512_or_epi32(tmp_3, tmp_4);
 
+    // Find local dpmin/argmin
     mask_1 = _mm512_cmp_ps_mask(inv_dp_v, inv_dpmax_v, _CMP_LT_OS);
     inv_dpmax_v = _mm512_min_ps(inv_dp_v, inv_dpmax_v);
     inv_tmp_3 = _mm512_mask_and_epi32(zeros, mask_1, curr_idx, ones);
@@ -1210,17 +1306,22 @@ int do_intersect3D_soa_vectorized_inlined(const struct CHObject_soa* obj1, const
   }
 
   int k = i;
+  // Iterate over the remaining points of the first object
   for (; i < obj1->num_points - 15; i += 16) {
+    // Compute the current indices
     curr_idx = _mm512_add_epi32(curr_idx, sixteens);
 
+    // Load the vertices
     vertex_x_coord_0 = _mm512_loadu_ps(&obj1->points[0][i]);
     vertex_y_coord_0 = _mm512_loadu_ps(&obj1->points[1][i]);
     vertex_z_coord_0 = _mm512_loadu_ps(&obj1->points[2][i]);
 
+    // Compute the dot products
     tmp_0 = _mm512_mul_ps(vertex_x_coord_0, dir_x);
     tmp_1 = _mm512_fmadd_ps(dir_y, vertex_y_coord_0, tmp_0);
     dp_v = _mm512_fmadd_ps(dir_z, vertex_z_coord_0, tmp_1);
 
+    // Find the local dpmax/argmax
     mask_0 = _mm512_cmp_ps_mask(dp_v, dpmax_v, _CMP_GT_OQ);
     dpmax_v = _mm512_max_ps(dp_v, dpmax_v);
     tmp_3 = _mm512_mask_and_epi32(zeros, mask_0, curr_idx, ones);
@@ -1228,6 +1329,7 @@ int do_intersect3D_soa_vectorized_inlined(const struct CHObject_soa* obj1, const
     argmax_v = _mm512_or_epi32(tmp_3, tmp_4);
   }
 
+  // Find the dpmax/argmax
   if (i != 0) {
     float dps[16];
     int argmaxs[16];
@@ -1242,6 +1344,7 @@ int do_intersect3D_soa_vectorized_inlined(const struct CHObject_soa* obj1, const
     }
   }
 
+  // Handle remaining cases
   for (; i < obj1->num_points; i++) {
     dp = dot3D_soa_vectorized(obj1->points[0][i], obj1->points[1][i], obj1->points[2][i], d);
     if (dp > dpmax) {
@@ -1250,17 +1353,22 @@ int do_intersect3D_soa_vectorized_inlined(const struct CHObject_soa* obj1, const
     }
   }
 
+  // Iterate over the remaining points of the second object
   for (; k < obj2->num_points - 15; k += 16) {
+    // Compute the current indices
     curr_idx = _mm512_add_epi32(curr_idx, sixteens);
 
+    // Load the vertices
     inv_vertex_x_coord_0 = _mm512_loadu_ps(&obj2->points[0][k]);
     inv_vertex_y_coord_0 = _mm512_loadu_ps(&obj2->points[1][k]);
     inv_vertex_z_coord_0 = _mm512_loadu_ps(&obj2->points[2][k]);
 
+    // Compute the dot products
     inv_tmp_0 = _mm512_mul_ps(inv_vertex_x_coord_0, dir_x);
     inv_tmp_1 = _mm512_fmadd_ps(dir_y, inv_vertex_y_coord_0, inv_tmp_0);
     inv_dp_v = _mm512_fmadd_ps(dir_z, inv_vertex_z_coord_0, inv_tmp_1);
 
+    // Find the local dpmin/argmin
     mask_1 = _mm512_cmp_ps_mask(inv_dp_v, inv_dpmax_v, _CMP_LT_OS);
     inv_dpmax_v = _mm512_min_ps(inv_dp_v, inv_dpmax_v);
     inv_tmp_3 = _mm512_mask_and_epi32(zeros, mask_1, curr_idx, ones);
@@ -1268,6 +1376,7 @@ int do_intersect3D_soa_vectorized_inlined(const struct CHObject_soa* obj1, const
     inv_argmin_v = _mm512_or_epi32(inv_tmp_3, inv_tmp_4);
   }
 
+  // Find dpmin/argmin
   if (k != 0) {
     float inv_dps[16];
     int argmins[16];
@@ -1283,6 +1392,7 @@ int do_intersect3D_soa_vectorized_inlined(const struct CHObject_soa* obj1, const
     }
   }
 
+  // Handle remaining cases
   for (; k < obj2->num_points; k++) {
     inv_dp = dot3D_soa_vectorized(obj2->points[0][k], obj2->points[1][k], obj2->points[2][k], d);
     if (inv_dp < inv_dpmax) {
@@ -1303,7 +1413,6 @@ int do_intersect3D_soa_vectorized_inlined(const struct CHObject_soa* obj1, const
 
   int max_iter = 100;  // most likely we need less
   while (max_iter--) {
-    // a = Support(A-B) = Support(A) - Invsup(B)
     dpmax = -1e9;
     argmax = 0;
     inv_dpmax = 1e9;
@@ -1322,9 +1431,12 @@ int do_intersect3D_soa_vectorized_inlined(const struct CHObject_soa* obj1, const
     curr_idx = _mm512_set_epi32(-1, -2, -3, -4, -5, -6, -7, -8,
                                 -9, -10, -11, -12, -13, -14, -15, -16);
 
+    // Joint loop
     for (i = 0; i < no_points_min - 15; i += 16) {
+      // Compute current indices
       curr_idx = _mm512_add_epi32(curr_idx, sixteens);
-
+  
+      // Load the vertices
       vertex_x_coord_0 = _mm512_loadu_ps(&obj1->points[0][i]);
       vertex_y_coord_0 = _mm512_loadu_ps(&obj1->points[1][i]);
       vertex_z_coord_0 = _mm512_loadu_ps(&obj1->points[2][i]);
@@ -1333,6 +1445,7 @@ int do_intersect3D_soa_vectorized_inlined(const struct CHObject_soa* obj1, const
       inv_vertex_y_coord_0 = _mm512_loadu_ps(&obj2->points[1][i]);
       inv_vertex_z_coord_0 = _mm512_loadu_ps(&obj2->points[2][i]);
 
+      // Compute the dot products
       tmp_0 = _mm512_mul_ps(vertex_x_coord_0, dir_x);
       tmp_1 = _mm512_fmadd_ps(dir_y, vertex_y_coord_0, tmp_0);
       dp_v = _mm512_fmadd_ps(dir_z, vertex_z_coord_0, tmp_1);
@@ -1341,12 +1454,14 @@ int do_intersect3D_soa_vectorized_inlined(const struct CHObject_soa* obj1, const
       inv_tmp_1 = _mm512_fmadd_ps(dir_y, inv_vertex_y_coord_0, inv_tmp_0);
       inv_dp_v = _mm512_fmadd_ps(dir_z, inv_vertex_z_coord_0, inv_tmp_1);
 
+      // Find the local dpmax/argmax
       mask_0 = _mm512_cmp_ps_mask(dp_v, dpmax_v, _CMP_GT_OQ);
       dpmax_v = _mm512_max_ps(dp_v, dpmax_v);
       tmp_3 = _mm512_mask_and_epi32(zeros, mask_0, curr_idx, ones);
       tmp_4 = _mm512_mask_andnot_epi32(argmax_v, mask_0, ones, argmax_v);
       argmax_v = _mm512_or_epi32(tmp_3, tmp_4);
 
+      // Find the local dpmin/argmin
       mask_1 = _mm512_cmp_ps_mask(inv_dp_v, inv_dpmax_v, _CMP_LT_OS);
       inv_dpmax_v = _mm512_min_ps(inv_dp_v, inv_dpmax_v);
       inv_tmp_3 = _mm512_mask_and_epi32(zeros, mask_1, curr_idx, ones);
@@ -1355,17 +1470,22 @@ int do_intersect3D_soa_vectorized_inlined(const struct CHObject_soa* obj1, const
     }
 
     k = i;
+    // Iterate over the remaining points of the first object
     for (; i < obj1->num_points - 15; i += 16) {
+      // Compute the current indices
       curr_idx = _mm512_add_epi32(curr_idx, sixteens);
 
+      // Load the vertices
       vertex_x_coord_0 = _mm512_loadu_ps(&obj1->points[0][i]);
       vertex_y_coord_0 = _mm512_loadu_ps(&obj1->points[1][i]);
       vertex_z_coord_0 = _mm512_loadu_ps(&obj1->points[2][i]);
 
+      // Compute the dot products
       tmp_0 = _mm512_mul_ps(vertex_x_coord_0, dir_x);
       tmp_1 = _mm512_fmadd_ps(dir_y, vertex_y_coord_0, tmp_0);
       dp_v = _mm512_fmadd_ps(dir_z, vertex_z_coord_0, tmp_1);
 
+      // Find local dpmax/argmax
       mask_0 = _mm512_cmp_ps_mask(dp_v, dpmax_v, _CMP_GT_OQ);
       dpmax_v = _mm512_max_ps(dp_v, dpmax_v);
       tmp_3 = _mm512_mask_and_epi32(zeros, mask_0, curr_idx, ones);
@@ -1373,6 +1493,7 @@ int do_intersect3D_soa_vectorized_inlined(const struct CHObject_soa* obj1, const
       argmax_v = _mm512_or_epi32(tmp_3, tmp_4);
     }
 
+    // Find dpmax/argmax
     if (i != 0) {
       float dps[16];
       int argmaxs[16];
@@ -1387,6 +1508,7 @@ int do_intersect3D_soa_vectorized_inlined(const struct CHObject_soa* obj1, const
       }
     }
 
+    // Handle remaining cases
     for (; i < obj1->num_points; i++) {
       dp = dot3D_soa_vectorized(obj1->points[0][i], obj1->points[1][i], obj1->points[2][i], d);
       if (dp > dpmax) {
@@ -1395,17 +1517,22 @@ int do_intersect3D_soa_vectorized_inlined(const struct CHObject_soa* obj1, const
       }
     }
 
+    // Iterate over the remaining points of the second object
     for (; k < obj2->num_points - 15; k += 16) {
+      // Compute the current indices
       curr_idx = _mm512_add_epi32(curr_idx, sixteens);
 
+      // Load the vertices
       inv_vertex_x_coord_0 = _mm512_loadu_ps(&obj2->points[0][k]);
       inv_vertex_y_coord_0 = _mm512_loadu_ps(&obj2->points[1][k]);
       inv_vertex_z_coord_0 = _mm512_loadu_ps(&obj2->points[2][k]);
 
+      // Compute the dot products
       inv_tmp_0 = _mm512_mul_ps(inv_vertex_x_coord_0, dir_x);
       inv_tmp_1 = _mm512_fmadd_ps(dir_y, inv_vertex_y_coord_0, inv_tmp_0);
       inv_dp_v = _mm512_fmadd_ps(dir_z, inv_vertex_z_coord_0, inv_tmp_1);
 
+      // Find local dpmin/argmin
       mask_1 = _mm512_cmp_ps_mask(inv_dp_v, inv_dpmax_v, _CMP_LT_OS);
       inv_dpmax_v = _mm512_min_ps(inv_dp_v, inv_dpmax_v);
       inv_tmp_3 = _mm512_mask_and_epi32(zeros, mask_1, curr_idx, ones);
@@ -1413,6 +1540,7 @@ int do_intersect3D_soa_vectorized_inlined(const struct CHObject_soa* obj1, const
       inv_argmin_v = _mm512_or_epi32(inv_tmp_3, inv_tmp_4);
     }
 
+    // Find dpmin/argmin
     if (k != 0) {
       float inv_dps[16];
       int argmins[16];
@@ -1428,6 +1556,7 @@ int do_intersect3D_soa_vectorized_inlined(const struct CHObject_soa* obj1, const
       }
     }
 
+    // Handle remaining cases
     for (; k < obj2->num_points; k++) {
       inv_dp = dot3D_soa_vectorized(obj2->points[0][k], obj2->points[1][k], obj2->points[2][k], d);
       if (inv_dp < inv_dpmax) {
@@ -1436,6 +1565,7 @@ int do_intersect3D_soa_vectorized_inlined(const struct CHObject_soa* obj1, const
       }
     }
 
+    // a = Support(A-B) = Support(A) - Invsup(B)
     a[0] = obj1->points[0][argmax] - obj2->points[0][argmin];
     a[1] = obj1->points[1][argmax] - obj2->points[1][argmin];
     a[2] = obj1->points[2][argmax] - obj2->points[2][argmin];
