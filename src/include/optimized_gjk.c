@@ -1,8 +1,6 @@
 #include "gjk.h"
 #include <stdio.h>
 
-// I miss my C++ templates...
-
 /**
  * Dot product of two 3D vectors.
  * */
@@ -28,10 +26,6 @@ void cross3D_optimized(const float x[3], const float y[3], float res[3]) {
   res[0] = x1 * y2 - x2 * y1;
   res[1] = x2 * y0 - x0 * y2;
   res[2] = x0 * y1 - x1 * y0;
-
-  /*res[0] = x[1] * y[2] - x[2] * y[1];
-  res[1] = x[2] * y[0] - x[0] * y[2];
-  res[2] = x[0] * y[1] - x[1] * y[0];*/
 }
 
 int ds_line3D_optimized(struct Simplex3D* s, float dir[3]) {
@@ -234,20 +228,20 @@ void support3D_optimized(const float (* points)[3], const float dir[3], float re
   int argmax = 0, argmax_1 = 0, argmax_2 = 0,
     argmax_3 = 0, argmax_4 = 0, argmax_5 = 0, argmax_6 = 0, argmax_7 = 0;
 
+  // Scalar replacement variables for input points
   float pts_i0, pts_i1, pts_i2;
   float pts_i0_1, pts_i1_1, pts_i2_1;
   float pts_i0_2, pts_i1_2, pts_i2_2;
-
   float pts_i0_3, pts_i1_3, pts_i2_3;
   float pts_i0_4, pts_i1_4, pts_i2_4;
   float pts_i0_5, pts_i1_5, pts_i2_5;
   float pts_i0_6, pts_i1_6, pts_i2_6;
   float pts_i0_7, pts_i1_7, pts_i2_7;
 
+  // Scalar replacement variables for products and summations in dot product
   float prd_0, prd_1, prd_2, sum_0;
   float prd_0_1, prd_1_1, prd_2_1, sum_0_1;
   float prd_0_2, prd_1_2, prd_2_2, sum_0_2;
-
   float prd_0_3, prd_1_3, prd_2_3, sum_0_3;
   float prd_0_4, prd_1_4, prd_2_4, sum_0_4;
   float prd_0_5, prd_1_5, prd_2_5, sum_0_5;
@@ -260,13 +254,8 @@ void support3D_optimized(const float (* points)[3], const float dir[3], float re
   float dir_2 = dir[2];
 
   int i;
+  // Loop unroll 8 times
   for (i = 0; i < N - 7; i += 8) {
-    /**
-     * 1) Function Inlining
-     * 2) Scalar Replacement
-     * 3) Loop unrolling
-     * */
-
     // Load
     pts_i0 = points[i][0];
     pts_i1 = points[i][1];
@@ -300,7 +289,7 @@ void support3D_optimized(const float (* points)[3], const float dir[3], float re
     pts_i1_7 = points[i + 7][1];
     pts_i2_7 = points[i + 7][2];
 
-    // Calculate
+    // Compute
     prd_0 = pts_i0 * dir_0;
     prd_1 = pts_i1 * dir_1;
     sum_0 = prd_0 + prd_1;
@@ -352,6 +341,7 @@ void support3D_optimized(const float (* points)[3], const float dir[3], float re
     dp_6 = sum_0_6 + prd_2_6;
     dp_7 = sum_0_7 + prd_2_7;
 
+    // Find the local dpmax and argmax
     if (dp > dpmax) {
       dpmax = dp;
       argmax = i;
@@ -393,6 +383,7 @@ void support3D_optimized(const float (* points)[3], const float dir[3], float re
     }
   }
 
+  // Find the global dpmax and argmax
   if (dpmax < dpmax_1) {
     dpmax = dpmax_1;
     argmax = argmax_1;
@@ -462,20 +453,20 @@ void invsup3D_optimized(const float (* points)[3], const float dir[3], float res
   int argmin = 0, argmin_1 = 0, argmin_2 = 0,
     argmin_3 = 0, argmin_4 = 0, argmin_5 = 0, argmin_6 = 0, argmin_7 = 0;
 
+  // Scalar replacement variables for input points
   float pts_i0, pts_i1, pts_i2;
   float pts_i0_1, pts_i1_1, pts_i2_1;
   float pts_i0_2, pts_i1_2, pts_i2_2;
-
   float pts_i0_3, pts_i1_3, pts_i2_3;
   float pts_i0_4, pts_i1_4, pts_i2_4;
   float pts_i0_5, pts_i1_5, pts_i2_5;
   float pts_i0_6, pts_i1_6, pts_i2_6;
   float pts_i0_7, pts_i1_7, pts_i2_7;
 
+  // Scalar replacement variables for products and summations in dot products
   float prd_0, prd_1, prd_2, sum_0;
   float prd_0_1, prd_1_1, prd_2_1, sum_0_1;
   float prd_0_2, prd_1_2, prd_2_2, sum_0_2;
-
   float prd_0_3, prd_1_3, prd_2_3, sum_0_3;
   float prd_0_4, prd_1_4, prd_2_4, sum_0_4;
   float prd_0_5, prd_1_5, prd_2_5, sum_0_5;
@@ -488,13 +479,8 @@ void invsup3D_optimized(const float (* points)[3], const float dir[3], float res
   float dir_2 = dir[2];
 
   int i;
+  // Loop unroll 4 times 
   for (i = 0; i < N - 3; i += 4) {
-    /**
-     * 1) Function Inlining
-     * 2) Scalar Replacement
-     * 3) Loop unrolling
-     * */
-
     // Load
     pts_i0 = points[i][0];
     pts_i1 = points[i][1];
@@ -512,7 +498,7 @@ void invsup3D_optimized(const float (* points)[3], const float dir[3], float res
     pts_i1_3 = points[i + 3][1];
     pts_i2_3 = points[i + 3][2];
 
-    // Calculate
+    // Compute
     prd_0 = pts_i0 * dir_0;
     prd_1 = pts_i1 * dir_1;
     sum_0 = prd_0 + prd_1;
@@ -539,6 +525,7 @@ void invsup3D_optimized(const float (* points)[3], const float dir[3], float res
     dp_2 = sum_0_2 + prd_2_2;
     dp_3 = sum_0_3 + prd_2_3;
 
+    // Compute local dpmax and argmax
     if (dp < dpmax) {
       dpmax = dp;
       argmin = i;
@@ -560,6 +547,7 @@ void invsup3D_optimized(const float (* points)[3], const float dir[3], float res
     }
   }
 
+  // Find the dpmax and argmax
   if (dpmax > dpmax_1) {
     dpmax = dpmax_1;
     argmin = argmin_1;
@@ -643,7 +631,6 @@ int do_intersect3D_optimized(const struct CHObject* obj1, const struct CHObject*
   return 1; // Most likely not reachable. Say we intersect by default.
 }
 
-// Loops are unrolled 3 times - since we switched to Icelake, I have to unroll them 8 times. Yay...
 int do_intersect3D_optimized_inlined(const struct CHObject* obj1, const struct CHObject* obj2) {
   // The search direction
   float d[3] = {1.f, 1.f, 1.f};  // could also be random
@@ -687,13 +674,8 @@ int do_intersect3D_optimized_inlined(const struct CHObject* obj1, const struct C
   dir_1 = d[1];
   dir_2 = d[2];
 
+  // Joint loop that calculates the dot product and argmax of both points at the same time.
   for (i = 0; i < no_points_min - 2; i += 3) {
-    /**
-    * 1) Function Inlining
-    * 2) Scalar Replacement
-    * 3) Loop unrolling
-    * */
-
     // Load
     pts_i0 = obj1->points[i][0];
     pts_i1 = obj1->points[i][1];
@@ -759,6 +741,7 @@ int do_intersect3D_optimized_inlined(const struct CHObject* obj1, const struct C
     invsup_dp_1 = invsup_sum_0_1 + invsup_prd_2_1;
     invsup_dp_2 = invsup_sum_0_2 + invsup_prd_2_2;
 
+    // Find the dpmax and argmax
     if (dp > dpmax) {
       dpmax = dp;
       argmax = i;
@@ -774,6 +757,7 @@ int do_intersect3D_optimized_inlined(const struct CHObject* obj1, const struct C
       argmax = i + 2;
     }
 
+    // Find dpmin and argmin
     if (invsup_dp < invsup_dpmax) {
       invsup_dpmax = invsup_dp;
       argmin = i;
@@ -791,13 +775,8 @@ int do_intersect3D_optimized_inlined(const struct CHObject* obj1, const struct C
   }
 
   int j = i;
+  // Iterate over the remaining points of first object.
   for (; i < obj1->num_points - 2; i += 3) {
-    /**
-    * 1) Function Inlining
-    * 2) Scalar Replacement
-    * 3) Loop unrolling
-    * */
-
     // Load
     pts_i0 = obj1->points[i][0];
     pts_i1 = obj1->points[i][1];
@@ -811,7 +790,7 @@ int do_intersect3D_optimized_inlined(const struct CHObject* obj1, const struct C
     pts_i1_2 = obj1->points[i + 2][1];
     pts_i2_2 = obj1->points[i + 2][2];
 
-    // Calculate
+    // Compute
     prd_0 = pts_i0 * dir_0;
     prd_1 = pts_i1 * dir_1;
     sum_0 = prd_0 + prd_1;
@@ -832,6 +811,7 @@ int do_intersect3D_optimized_inlined(const struct CHObject* obj1, const struct C
     dp_1 = sum_0_1 + prd_2_1;
     dp_2 = sum_0_2 + prd_2_2;
 
+    // Find the dpmax and argmax
     if (dp > dpmax) {
       dpmax = dp;
       argmax = i;
@@ -870,13 +850,8 @@ int do_intersect3D_optimized_inlined(const struct CHObject* obj1, const struct C
     }
   }
 
+  // Iterate over the remaining points of second object.
   for (; j < obj2->num_points - 2; j += 3) {
-    /**
-    * 1) Function Inlining
-    * 2) Scalar Replacement
-    * 3) Loop unrolling
-    * */
-
     // Load
     invsup_pts_i0 = obj2->points[j][0];
     invsup_pts_i1 = obj2->points[j][1];
@@ -890,7 +865,7 @@ int do_intersect3D_optimized_inlined(const struct CHObject* obj1, const struct C
     invsup_pts_i1_2 = obj2->points[j + 2][1];
     invsup_pts_i2_2 = obj2->points[j + 2][2];
 
-    // Calculate
+    // Compute
     invsup_prd_0 = invsup_pts_i0 * dir_0;
     invsup_prd_1 = invsup_pts_i1 * dir_1;
     invsup_sum_0 = invsup_prd_0 + invsup_prd_1;
@@ -911,6 +886,7 @@ int do_intersect3D_optimized_inlined(const struct CHObject* obj1, const struct C
     invsup_dp_1 = invsup_sum_0_1 + invsup_prd_2_1;
     invsup_dp_2 = invsup_sum_0_2 + invsup_prd_2_2;
 
+    // Find the dpmin and argmin
     if (invsup_dp < invsup_dpmax) {
       invsup_dpmax = invsup_dp;
       argmin = j;
@@ -948,8 +924,8 @@ int do_intersect3D_optimized_inlined(const struct CHObject* obj1, const struct C
       argmin = j;
     }
   }
+  
   // S = Support(A-B) = Support(A) - Invsup(B)
-
   s.p[0][0] = obj1->points[argmax][0] - obj2->points[argmin][0];
   s.p[0][1] = obj1->points[argmax][1] - obj2->points[argmin][1];
   s.p[0][2] = obj1->points[argmax][2] - obj2->points[argmin][2];
@@ -973,13 +949,9 @@ int do_intersect3D_optimized_inlined(const struct CHObject* obj1, const struct C
     dir_0 = d[0];
     dir_1 = d[1];
     dir_2 = d[2];
+    
+    // Joint loop that iterates over both objects.
     for (i = 0; i < no_points_min - 2; i += 3) {
-      /**
-      * 1) Function Inlining
-      * 2) Scalar Replacement
-      * 3) Loop unrolling
-      * */
-
       // Load
       pts_i0 = obj1->points[i][0];
       pts_i1 = obj1->points[i][1];
@@ -1005,7 +977,7 @@ int do_intersect3D_optimized_inlined(const struct CHObject* obj1, const struct C
       invsup_pts_i1_2 = obj2->points[i + 2][1];
       invsup_pts_i2_2 = obj2->points[i + 2][2];
 
-      // Calculate
+      // Compute
       prd_0 = pts_i0 * dir_0;
       prd_1 = pts_i1 * dir_1;
       sum_0 = prd_0 + prd_1;
@@ -1045,6 +1017,7 @@ int do_intersect3D_optimized_inlined(const struct CHObject* obj1, const struct C
       invsup_dp_1 = invsup_sum_0_1 + invsup_prd_2_1;
       invsup_dp_2 = invsup_sum_0_2 + invsup_prd_2_2;
 
+      // Find local dpmax and argmax
       if (dp > dpmax) {
         dpmax = dp;
         argmax = i;
@@ -1060,6 +1033,7 @@ int do_intersect3D_optimized_inlined(const struct CHObject* obj1, const struct C
         argmax = i + 2;
       }
 
+      // Find dpmin and argmin
       if (invsup_dp < invsup_dpmax) {
         invsup_dpmax = invsup_dp;
         argmin = i;
@@ -1077,13 +1051,8 @@ int do_intersect3D_optimized_inlined(const struct CHObject* obj1, const struct C
     }
 
     int j = i;
+    // Finish remaining points of the first object
     for (; i < obj1->num_points - 2; i += 3) {
-      /**
-      * 1) Function Inlining
-      * 2) Scalar Replacement
-      * 3) Loop unrolling
-      * */
-
       // Load
       pts_i0 = obj1->points[i][0];
       pts_i1 = obj1->points[i][1];
@@ -1118,6 +1087,7 @@ int do_intersect3D_optimized_inlined(const struct CHObject* obj1, const struct C
       dp_1 = sum_0_1 + prd_2_1;
       dp_2 = sum_0_2 + prd_2_2;
 
+      // Find dpmax and argmax
       if (dp > dpmax) {
         dpmax = dp;
         argmax = i;
@@ -1156,13 +1126,8 @@ int do_intersect3D_optimized_inlined(const struct CHObject* obj1, const struct C
       }
     }
 
+    // Finish remaining points of the first object
     for (; j < obj2->num_points - 2; j += 3) {
-      /**
-      * 1) Function Inlining
-      * 2) Scalar Replacement
-      * 3) Loop unrolling
-      * */
-
       // Load
       invsup_pts_i0 = obj2->points[j][0];
       invsup_pts_i1 = obj2->points[j][1];
@@ -1176,7 +1141,7 @@ int do_intersect3D_optimized_inlined(const struct CHObject* obj1, const struct C
       invsup_pts_i1_2 = obj2->points[j + 2][1];
       invsup_pts_i2_2 = obj2->points[j + 2][2];
 
-      // Calculate
+      // Compute
       invsup_prd_0 = invsup_pts_i0 * dir_0;
       invsup_prd_1 = invsup_pts_i1 * dir_1;
       invsup_sum_0 = invsup_prd_0 + invsup_prd_1;
@@ -1197,6 +1162,7 @@ int do_intersect3D_optimized_inlined(const struct CHObject* obj1, const struct C
       invsup_dp_1 = invsup_sum_0_1 + invsup_prd_2_1;
       invsup_dp_2 = invsup_sum_0_2 + invsup_prd_2_2;
 
+      // Find local dpmin and argmin
       if (invsup_dp < invsup_dpmax) {
         invsup_dpmax = invsup_dp;
         argmin = j;
@@ -1235,6 +1201,7 @@ int do_intersect3D_optimized_inlined(const struct CHObject* obj1, const struct C
       }
     }
 
+    // a = Support(A-B) = Support(A) - Invsup(B)
     a[0] = obj1->points[argmax][0] - obj2->points[argmin][0];
     a[1] = obj1->points[argmax][1] - obj2->points[argmin][1];
     a[2] = obj1->points[argmax][2] - obj2->points[argmin][2];
@@ -1339,8 +1306,8 @@ int do_intersect3D_o_i_lu8(const struct CHObject* obj1, const struct CHObject* o
   float dir_1 = d[1];
   float dir_2 = d[2];
 
-  // Joint loop that iterates both object 1 and object 2 at the same time to reduce total no. of iterations.
   int i;
+  // Joint loop that iterates both object 1 and object 2 at the same time to reduce total no. of iterations.
   for (i = 0; i < no_points_min - 3; i += 4) {
     // Load first object
     pts_i0 = obj1->points[i][0];
@@ -1430,6 +1397,7 @@ int do_intersect3D_o_i_lu8(const struct CHObject* obj1, const struct CHObject* o
     invsup_dp_2 = invsup_sum_0_2 + invsup_prd_2_2;
     invsup_dp_3 = invsup_sum_0_3 + invsup_prd_2_3;
 
+    // Find local dpmax and argmax
     if (dp > dpmax) {
       dpmax = dp;
       argmax = i;
@@ -1450,6 +1418,7 @@ int do_intersect3D_o_i_lu8(const struct CHObject* obj1, const struct CHObject* o
       argmax_3 = i + 3;
     }
 
+    // Find local dpmin and argmin
     if (invsup_dp < invsup_dpmax) {
       invsup_dpmax = invsup_dp;
       argmin = i;
@@ -1474,12 +1443,6 @@ int do_intersect3D_o_i_lu8(const struct CHObject* obj1, const struct CHObject* o
   // Joint loop ended - Complete the search for support of first object if it wasn't completed
   int j = i;
   for (; i < obj1->num_points - 7; i += 8) {
-    /**
-    * 1) Function Inlining
-    * 2) Scalar Replacement
-    * 3) Loop unrolling
-    * */
-
     // Load
     pts_i0 = obj1->points[i][0];
     pts_i1 = obj1->points[i][1];
@@ -1568,6 +1531,7 @@ int do_intersect3D_o_i_lu8(const struct CHObject* obj1, const struct CHObject* o
     dp_6 = sum_0_6 + prd_2_6;
     dp_7 = sum_0_7 + prd_2_7;
 
+    // Find local dpmax and argmax
     if (dp > dpmax) {
       dpmax = dp;
       argmax = i;
@@ -1609,6 +1573,7 @@ int do_intersect3D_o_i_lu8(const struct CHObject* obj1, const struct CHObject* o
     }
   }
 
+  // Find dpmax and argmax
   if (dpmax < dpmax_1) {
     dpmax = dpmax_1;
     argmax = argmax_1;
@@ -1668,12 +1633,6 @@ int do_intersect3D_o_i_lu8(const struct CHObject* obj1, const struct CHObject* o
 
   // Joint loop ended - Complete the search for support of second object if it wasn't completed
   for (; j < obj2->num_points - 7; j += 8) {
-    /**
-    * 1) Function Inlining
-    * 2) Scalar Replacement
-    * 3) Loop unrolling
-    * */
-
     // Load
     invsup_pts_i0 = obj2->points[j][0];
     invsup_pts_i1 = obj2->points[j][1];
@@ -1758,6 +1717,7 @@ int do_intersect3D_o_i_lu8(const struct CHObject* obj1, const struct CHObject* o
     invsup_dp_6 = invsup_sum_0_6 + invsup_prd_2_6;
     invsup_dp_7 = invsup_sum_0_7 + invsup_prd_2_7;
 
+    // Find local dpmin and argmin
     if (invsup_dp < invsup_dpmax) {
       invsup_dpmax = invsup_dp;
       argmin = j;
@@ -1799,6 +1759,7 @@ int do_intersect3D_o_i_lu8(const struct CHObject* obj1, const struct CHObject* o
     }
   }
 
+  // Find dpmin and argmin
   if (invsup_dpmax > invsup_dpmax_1) {
     invsup_dpmax = invsup_dpmax_1;
     argmin = argmin_1;
@@ -1868,7 +1829,6 @@ int do_intersect3D_o_i_lu8(const struct CHObject* obj1, const struct CHObject* o
 
   int max_iter = 100;  // most likely we need less
   while (max_iter--) {
-    // a = Support(A-B) = Support(A) - Invsup(B)
     dpmax = -1e9, dpmax_1 = -1e9, dpmax_2 = -1e9,
       dpmax_3 = -1e9, dpmax_4 = -1e9, dpmax_5 = -1e9, dpmax_6 = -1e9, dpmax_7 = -1e9;
     argmax = 0, argmax_1 = 0, argmax_2 = 0,
@@ -1884,6 +1844,7 @@ int do_intersect3D_o_i_lu8(const struct CHObject* obj1, const struct CHObject* o
     dir_1 = d[1];
     dir_2 = d[2];
 
+    // Joint loop that iterates over both object to calculate dp and argmin/argmax.
     for (i = 0; i < no_points_min - 3; i += 4) {
       // Load first object
       pts_i0 = obj1->points[i][0];
@@ -1973,6 +1934,7 @@ int do_intersect3D_o_i_lu8(const struct CHObject* obj1, const struct CHObject* o
       invsup_dp_2 = invsup_sum_0_2 + invsup_prd_2_2;
       invsup_dp_3 = invsup_sum_0_3 + invsup_prd_2_3;
 
+      // Find local dpmax and argmax
       if (dp > dpmax) {
         dpmax = dp;
         argmax = i;
@@ -1993,6 +1955,7 @@ int do_intersect3D_o_i_lu8(const struct CHObject* obj1, const struct CHObject* o
         argmax_3 = i + 3;
       }
 
+      // Find local dpmin and argmin
       if (invsup_dp < invsup_dpmax) {
         invsup_dpmax = invsup_dp;
         argmin = i;
@@ -2017,12 +1980,6 @@ int do_intersect3D_o_i_lu8(const struct CHObject* obj1, const struct CHObject* o
     // Joint loop ended - Complete the search for support of first object if it wasn't completed
     j = i;
     for (; i < obj1->num_points - 7; i += 8) {
-      /**
-      * 1) Function Inlining
-      * 2) Scalar Replacement
-      * 3) Loop unrolling
-      * */
-
       // Load
       pts_i0 = obj1->points[i][0];
       pts_i1 = obj1->points[i][1];
@@ -2111,6 +2068,7 @@ int do_intersect3D_o_i_lu8(const struct CHObject* obj1, const struct CHObject* o
       dp_6 = sum_0_6 + prd_2_6;
       dp_7 = sum_0_7 + prd_2_7;
 
+      // Find local dpmax and argmax
       if (dp > dpmax) {
         dpmax = dp;
         argmax = i;
@@ -2152,6 +2110,7 @@ int do_intersect3D_o_i_lu8(const struct CHObject* obj1, const struct CHObject* o
       }
     }
 
+    // Find dpmax and argmax
     if (dpmax < dpmax_1) {
       dpmax = dpmax_1;
       argmax = argmax_1;
@@ -2211,12 +2170,6 @@ int do_intersect3D_o_i_lu8(const struct CHObject* obj1, const struct CHObject* o
 
     // Joint loop ended - Complete the search for support of second object if it wasn't completed
     for (; j < obj2->num_points - 7; j += 8) {
-      /**
-      * 1) Function Inlining
-      * 2) Scalar Replacement
-      * 3) Loop unrolling
-      * */
-
       // Load
       invsup_pts_i0 = obj2->points[j][0];
       invsup_pts_i1 = obj2->points[j][1];
@@ -2301,6 +2254,7 @@ int do_intersect3D_o_i_lu8(const struct CHObject* obj1, const struct CHObject* o
       invsup_dp_6 = invsup_sum_0_6 + invsup_prd_2_6;
       invsup_dp_7 = invsup_sum_0_7 + invsup_prd_2_7;
 
+      // Find local dpmin and argmin
       if (invsup_dp < invsup_dpmax) {
         invsup_dpmax = invsup_dp;
         argmin = j;
@@ -2342,6 +2296,7 @@ int do_intersect3D_o_i_lu8(const struct CHObject* obj1, const struct CHObject* o
       }
     }
 
+    // Find dpmin and argmin
     if (invsup_dpmax > invsup_dpmax_1) {
       invsup_dpmax = invsup_dpmax_1;
       argmin = argmin_1;
@@ -2399,6 +2354,7 @@ int do_intersect3D_o_i_lu8(const struct CHObject* obj1, const struct CHObject* o
       }
     }
 
+    // a = Support(A-B) = Support(A) - Invsup(B)
     a[0] = obj1->points[argmax][0] - obj2->points[argmin][0];
     a[1] = obj1->points[argmax][1] - obj2->points[argmin][1];
     a[2] = obj1->points[argmax][2] - obj2->points[argmin][2];
@@ -2466,12 +2422,6 @@ int do_intersect3D_o_i_branch_later(const struct CHObject* obj1, const struct CH
   dir_2 = d[2];
 
   for (i = 0; i < no_points_min - 2; i += 3) {
-    /**
-    * 1) Function Inlining
-    * 2) Scalar Replacement
-    * 3) Loop unrolling
-    * */
-
     // Load
     pts_i0 = obj1->points[i][0];
     pts_i1 = obj1->points[i][1];
@@ -2540,12 +2490,6 @@ int do_intersect3D_o_i_branch_later(const struct CHObject* obj1, const struct CH
 
   int j = i;
   for (; i < obj1->num_points - 2; i += 3) {
-    /**
-    * 1) Function Inlining
-    * 2) Scalar Replacement
-    * 3) Loop unrolling
-    * */
-
     // Load
     pts_i0 = obj1->points[i][0];
     pts_i1 = obj1->points[i][1];
