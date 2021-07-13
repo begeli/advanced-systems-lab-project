@@ -8,7 +8,7 @@ We present optimized implementations of two 3D collision detection algorithms:  
 * We have managed to achieve a maximum speedup of 2.45 for BVH. 
 
 ## Files and Folders
-* `14_report.pdf`: This file is the final version of our report. It contains brief explanations of the algorithms of interest, detailed explanations of the optimization methods we applied and our experimental results.
+* [`14_report.pdf`](https://github.com/begeli/advanced-systems-lab-project/blob/main/14_report.pdf): This file is the final version of our report. It contains brief explanations of the algorithms of interest, detailed explanations of the optimization methods we applied and our experimental results.
 * `src`: This folder contains full implementations of the algorithms and optimized versions.
 * `test`: This folder contains our unit test cases for the algorithms. 
 * `benchmarking`: This folder contains the code used to measure execution times of the various implementations.
