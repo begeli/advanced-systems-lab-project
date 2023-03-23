@@ -25,7 +25,7 @@ For now the C compiler flags are: `-std=c11 -O3 -march=[MACHINE ARCHITECTURE] -m
 
 `[MACHINE ARCHITECTURE]` can be:
 * `skylake-avx512` (for the rented `Intel Xeon D-2141I CPU` bare metal server) for BVH
-* `icelake` (`Intel Core i7-1068NG7`) for GJK
+* `icelake-client` (`Intel Core i7-1068NG7`) for GJK
 
 The C++ flags are analogous.
 
